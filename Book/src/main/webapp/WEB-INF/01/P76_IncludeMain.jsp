@@ -5,6 +5,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>include 지시어</title>
+		<!-- 
+			날짜 : 2022/10/13
+			이름 : 라성준
+			내용 : include 지시어
+		 -->
 	</head>
 	<body>
 		<%
