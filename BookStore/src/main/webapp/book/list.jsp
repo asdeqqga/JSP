@@ -8,24 +8,19 @@
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	List<BookBean> books = null;
+	List<BookBean> books = new ArrayList<>();
 
 	try{
 		Connection conn = DBCP.getConnection();
-		
-		// 3단계
 		Statement stmt = conn.createStatement();
-		
-		// 4단계
 		ResultSet rs = stmt.executeQuery("SELECT * FROM `book`");
 		
-		// 5단계
-		books = new ArrayList<>();
+			
 		
 		while(rs.next()){
 			BookBean bb = new BookBean();
 			bb.setBookId(rs.getInt(1));
-			bb.setBookname(rs.getString(2));
+			bb.setBookName(rs.getString(2));
 			bb.setPublisher(rs.getString(3));
 			bb.setPrice(rs.getInt(4));
 					
@@ -49,7 +44,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user::list</title>
+		<title>Bookstore::list</title>
 	</head>
 	<body>
 		<h3>도서 목록</h3>
@@ -69,7 +64,7 @@
 			%>
 			<tr>
 				<td><%= bb.getBookId() %></td>
-				<td><%= bb.getBookname() %></td>
+				<td><%= bb.getBookName() %></td>
 				<td><%= bb.getPublisher() %></td>
 				<td><%= bb.getPrice() %></td>
 				<td>

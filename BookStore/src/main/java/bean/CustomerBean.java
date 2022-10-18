@@ -4,8 +4,8 @@ public class CustomerBean {
 	
 	private int custId;
 	private String name;
-	private String addr;
-	private int hp;
+	private String address;
+	private int phone;
 	
 	public int getCustId() {
 		return custId;
@@ -19,17 +19,17 @@ public class CustomerBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAddr() {
-		return addr;
+	public String getAddress() {
+		return address;
 	}
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public int getHp() {
-		return hp;
+	public int getPhone() {
+		return phone;
 	}
-	public void setHp(int hp) {
-		this.hp = hp;
+	public void setPhone(int phone) {
+		this.phone = phone;
 	}
 	
 }

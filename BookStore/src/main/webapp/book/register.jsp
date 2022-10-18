@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user::register</title>
+		<title>Bookstore::register</title>
 	</head>
 	<body>
 		<h3>도서등록</h3>
@@ -18,7 +18,7 @@
 				</tr>
 				<tr>
 					<td>도서명</td>
-					<td><input type="text" name="bookname" placeholder="도서명 입력"/></td>
+					<td><input type="text" name="bookName" placeholder="도서명 입력"/></td>
 				</tr>
 				<tr>
 					<td>출판사</td>

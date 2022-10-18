@@ -1,9 +1,46 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="config.DBCP"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="bean.BookBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+    String bookId = request.getParameter("bookId");
+	
+	BookBean bb = null;
+	
+	try{
+		Connection conn = DBCP.getConnection();
+		String sql = "SELECT * FROM `book` WHERE `bookId`=?";
+		PreparedStatement psmt = conn.prepareStatement(sql);
+		psmt.setString(1, bookId);
+		
+		ResultSet rs = psmt.executeQuery();
+		
+		bb = new BookBean();
+		if(rs.next()){
+			bb.setBookId(rs.getInt(1));
+			bb.setBookName(rs.getString(2));
+			bb.setPublisher(rs.getString(3));
+			bb.setPrice(rs.getInt(4));
+		}
+		
+			rs.close();
+			psmt.close();
+			conn.close();
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+
+
+%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user::register</title>
+		<title>BookStore::modify</title>
 	</head>
 	<body>
 		<h3>도서수정</h3>
@@ -14,19 +51,19 @@
 			<table border="1">
 				<tr>
 					<td>도서번호</td>
-					<td><input type="text" name="Id" placeholder="도서번호 입력"/></td>
+					<td><input type="text" name="bookId" valu="<%= bb.getBookId() %>"/></td>
 				</tr>
 				<tr>
 					<td>도서명</td>
-					<td><input type="text" name="name" placeholder="도서명 입력"/></td>
+					<td><input type="text" name="bookname" valu="<%= bb.getBookName() %>"/></td>
 				</tr>
 				<tr>
 					<td>출판사</td>
-					<td><input type="text" name="publisher" placeholder="출판사 입력"/></td>
+					<td><input type="text" name="publisher" valu="<%= bb.getPublisher() %>"/></td>
 				</tr>
 				<tr>
 					<td>가격</td>
-					<td><input type="text" name="price" placeholder="가격 입력"/></td>
+					<td><input type="text" name="price" valu="<%= bb.getPrice() %>"/></td>
 				</tr>
 				
 				

@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user::register</title>
+		<title>customer::register</title>
 	</head>
 	<body>
 		<h3>고객수정</h3>
