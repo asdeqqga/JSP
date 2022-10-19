@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String bookId = request.getParameter("bookId");
+	String bookId = request.getParameter("custId");
 	
 	try{
 		Connection conn = DBCP.getConnection();

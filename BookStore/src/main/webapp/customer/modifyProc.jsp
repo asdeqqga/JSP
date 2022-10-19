@@ -12,7 +12,8 @@
 	try{
 		Connection conn = DBCP.getConnection();
 		
-		String sql = "UPDATE `customer` SET `name`=?, `address`=?, `phone`=? WHERE `custId`=?";
+		String sql = "update `customer` set `name`=?, `address`=?"
+						+ ", `phone`=? where `custId`=?";
 		
 		PreparedStatement psmt = conn.prepareStatement(sql);
 		psmt.setString(1, name);

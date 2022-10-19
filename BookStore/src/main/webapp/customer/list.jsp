@@ -5,7 +5,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -25,7 +24,7 @@
 			cb.setCustId(rs.getInt(1));
 			cb.setName(rs.getString(2));
 			cb.setAddress(rs.getString(3));
-			cb.setPhone(rs.getInt(4));
+			cb.setPhone(rs.getString(4));
 	
 			customers.add(cb);
 		}
@@ -50,7 +49,7 @@
 		<title>user::list</title>
 	</head>
 	<body>
-		<h3>도서 목록</h3>
+		<h3>고객 목록</h3>
 		<a href="../index.jsp">처음으로</a>
 		<a href="./register.jsp">고객등록</a>
 		

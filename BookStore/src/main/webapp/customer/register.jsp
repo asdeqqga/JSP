@@ -3,35 +3,33 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>customer::register</title>
+		<title>고객등록</title>
 	</head>
 	<body>
-		<h3>고객등록</h3>
+		<h2>고객등록</h2>
 		<a href="../index.jsp">처음으로</a>
 		<a href="./list.jsp">고객목록</a>
 		
-		<form action="./register.jsp" method="post">
+		<form action="./registerProc.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>고객명</td>
-					<td><input type="text" name="name" placeholder="고객명 입력"/></td>
+					<td><input type="text" name="name"></td>
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><input type="text" name="addres" placeholder="주소 입력"/></td>
+					<td><input type="text" name="address"></td>
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td><input type="text" name="phone" placeholder="휴대폰 입력"/></td>
+					<td><input type="text" name="phone"></td>
 				</tr>
-				
 				<tr>
 					<td colspan="2" align="right">
-						<input type="submit" value="등록하기"/>
+						<input type="submit" value="등록">
 					</td>
 				</tr>
 			</table>
 		</form>
-		
 	</body>
 </html>
