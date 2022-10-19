@@ -1,9 +1,46 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="config.DBCP"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="bean.CustomerBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	String custId = request.getParameter("custId");
+	
+	CustomerBean cb = null;
+	
+	try{
+		Connection conn = DBCP.getConnection();
+		String sql = "SELECT * FROM `customer` WHERE `custId`=?";
+		PreparedStatement psmt = conn.prepareStatement(sql);
+		psmt.setString(1, custId);
+		
+		ResultSet rs = psmt.executeQuery();
+		
+		cb = new CustomerBean();
+		if(rs.next()){
+			cb.setCustId(rs.getInt(1));
+			cb.setName(rs.getString(2));
+			cb.setAddress(rs.getString(3));
+			cb.setPhone(rs.getInt(4));
+		}
+		
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+
+%>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>customer::register</title>
+		<title>customer::modify</title>
 	</head>
 	<body>
 		<h3>고객수정</h3>
@@ -14,19 +51,19 @@
 			<table border="1">
 				<tr>
 					<td>고객번호</td>
-					<td><input type="text" name="Id" placeholder="고객번호 입력"/></td>
+					<td><input type="text" name="Id" value="<%= cb.getCustId() %>"/></td>
 				</tr>
 				<tr>
 					<td>고객명</td>
-					<td><input type="text" name="name" placeholder="고객명 입력"/></td>
+					<td><input type="text" name="name" value="<%= cb.getName() %>"/></td>
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><input type="text" name="publisher" placeholder="주소 입력"/></td>
+					<td><input type="text" name="addres" value="<%= cb.getAddress() %>"/></td>
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td><input type="text" name="price" placeholder="휴대폰 입력"/></td>
+					<td><input type="text" name="phone" value="<%= cb.getPhone() %>"/></td>
 				</tr>
 				
 				

@@ -18,11 +18,11 @@
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><input type="text" name="publisher" placeholder="주소 입력"/></td>
+					<td><input type="text" name="addres" placeholder="주소 입력"/></td>
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td><input type="text" name="price" placeholder="휴대폰 입력"/></td>
+					<td><input type="text" name="phone" placeholder="휴대폰 입력"/></td>
 				</tr>
 				
 				<tr>

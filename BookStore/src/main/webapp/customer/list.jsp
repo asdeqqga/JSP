@@ -52,7 +52,7 @@
 	<body>
 		<h3>도서 목록</h3>
 		<a href="../index.jsp">처음으로</a>
-		<a href="./register.jsp">도서목록</a>
+		<a href="./register.jsp">고객등록</a>
 		
 		<table border="1">
 			<tr>

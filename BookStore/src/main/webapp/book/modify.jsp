@@ -51,19 +51,19 @@
 			<table border="1">
 				<tr>
 					<td>도서번호</td>
-					<td><input type="text" name="bookId" valu="<%= bb.getBookId() %>"/></td>
+					<td><input type="text" name="bookId" value="<%= bb.getBookId() %>"/></td>
 				</tr>
 				<tr>
 					<td>도서명</td>
-					<td><input type="text" name="bookname" valu="<%= bb.getBookName() %>"/></td>
+					<td><input type="text" name="bookname" value="<%= bb.getBookName() %>"/></td>
 				</tr>
 				<tr>
 					<td>출판사</td>
-					<td><input type="text" name="publisher" valu="<%= bb.getPublisher() %>"/></td>
+					<td><input type="text" name="publisher" value="<%= bb.getPublisher() %>"/></td>
 				</tr>
 				<tr>
 					<td>가격</td>
-					<td><input type="text" name="price" valu="<%= bb.getPrice() %>"/></td>
+					<td><input type="text" name="price" value="<%= bb.getPrice() %>"/></td>
 				</tr>
 				
 				
