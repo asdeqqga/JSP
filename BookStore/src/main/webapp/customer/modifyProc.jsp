@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("utf-8");
 	String custId = request.getParameter("custId");
 	String name = request.getParameter("name");
-	String addres = request.getParameter("addres");
+	String addres = request.getParameter("address");
 	String phone = request.getParameter("phone");
 	
 	try{
@@ -30,5 +30,4 @@
 	}
 	
 	response.sendRedirect("./list.jsp");
-
 %>
