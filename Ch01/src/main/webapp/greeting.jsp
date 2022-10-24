@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<meta charset="UTF-8">
-		<title>greeting</title>
-	</head>
+<meta charset="UTF-8">
+<title>greeting</title>
+</head>
 <body>
-	<h3>Greeting</h3>
+	<h3>Greeting JSP!</h3>
 	<a href="./hello.jsp">hello</a>
-	<a href="./weLcome.jsp">welcome</a>
+	<a href="./welcome.jsp">welcome</a>
 	<a href="./greeting.jsp">greeting</a>
 	
 </body>
