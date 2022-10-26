@@ -7,15 +7,16 @@
 		<!-- 
 			날짜 : 2022/10/26
 			이름 : 라성준
-			내용 : 내장 객체 request 실습하기
+			내용 : 요청 매개변수 읽기
 		 -->
 	</head>
 	<body>
+	
 		<%
-		request.setCharacterEncoding("utf-8");  
-		String id = request.getParameter("id");
-		String sex = request.getParameter("sex");
-		String[] favo = request.getParameterValues("favo");
+		request.setCharacterEncoding("UTF-8");  
+		String id      = request.getParameter("id");
+		String sex 	   = request.getParameter("sex");
+		String[] favo  = request.getParameterValues("favo");
 		String favoStr = "";
 		
 		if(favo != null){
@@ -23,10 +24,9 @@
 				favoStr += favo[i] + " ";
 			}
 		}
-		
-		String intro = request.getParameter("intro").replace("\r\n", "<br/>");
-		
+		String intro = request.getParameter("intro").replace("\r\n", "<br/>");		
 		%>
+		
 		<ul>
 			<li>아이디 : 	 <%= id %></li>
 			<li>성별 : 	 <%= sex %></li>
