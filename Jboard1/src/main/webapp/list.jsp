@@ -10,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+	String no = request.getParameter("no");
 	String pg = request.getParameter("pg");
 
 	// 목록 처리 관련 변수 선언
@@ -75,7 +76,7 @@
             <% for(ArticleBean article : articles){ %>
             <tr>
                 <td><%= pageStartNum-- %></td>
-                <td><a href="/Jboard1/view.jsp"><%= article.getTitle() %>[<%= article.getComment() %>]</a></td>
+                <td><a href="/Jboard1/view.jsp?no=<%= article.getNo() %>&pg=<%= currentPage %>"><%= article.getTitle() %>[<%= article.getComment() %>]</a></td>
                 <td><%= article.getNick() %></td>
                 <td><%= article.getRdate().substring(2, 10) %></td>
                 <td><%= article.getHit() %></td>
