@@ -2,6 +2,10 @@
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="kr.co.jboard1.bean.ArticleBean"%>
 <%@page import="kr.co.jboard1.dao.ArticleDAO"%>
+<%@page import="java.util.Date"%>
+<%@page import="com.google.gson.JsonObject"%>
+<%@page import="kr.co.jboard1.bean.ArticleBean"%>
+<%@page import="kr.co.jboard1.dao.ArticleDAO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="kr.co.jboard1.db.Sql"%>
 <%@page import="java.sql.Connection"%>
@@ -23,6 +27,7 @@
 	
 	JsonObject json = new JsonObject();
 	json.addProperty("result", 1);
+	json.addProperty("no", article.getNo());
 	json.addProperty("nick", article.getNick());
 	json.addProperty("date", article.getRdate());
 	json.addProperty("content", article.getContent());
