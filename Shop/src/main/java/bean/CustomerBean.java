@@ -1,13 +1,14 @@
 package bean;
 
 public class CustomerBean {
-	
+
 	private String custId;
 	private String name;
 	private String hp;
 	private String addr;
+	private String rdate;
+	
 	public String getCustId() {
-		
 		return custId;
 	}
 	public void setCustId(String custId) {
@@ -31,12 +32,13 @@ public class CustomerBean {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public String getDate() {
-		return date;
+	public String getRdate() {
+		return rdate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
 	}
-	private String date;	
+	
+	
 	
 }

@@ -1,16 +1,16 @@
 package bean;
 
 public class ProductBean {
-	
-	private String prodNo;
+
+	private int prodNo;
 	private String prodName;
-	private String stock;
+	private int stock;
 	private int price;
 	private String company;
-	public String getProdNo() {
+	public int getProdNo() {
 		return prodNo;
 	}
-	public void setProdNo(String prodNo) {
+	public void setProdNo(int prodNo) {
 		this.prodNo = prodNo;
 	}
 	public String getProdName() {
@@ -19,10 +19,10 @@ public class ProductBean {
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
 	}
-	public String getStock() {
+	public int getStock() {
 		return stock;
 	}
-	public void setStock(String stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 	public int getPrice() {
@@ -37,6 +37,8 @@ public class ProductBean {
 	public void setCompany(String company) {
 		this.company = company;
 	}
+	
+	
 	
 	
 }

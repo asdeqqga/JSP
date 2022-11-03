@@ -11,6 +11,7 @@ public class OrderBean {
 	// 추가필드
 	private String name;
 	private String prodName;
+	
 	public int getOrderNo() {
 		return orderNo;
 	}
@@ -53,5 +54,7 @@ public class OrderBean {
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
 	}
+	
+	
 	
 }
