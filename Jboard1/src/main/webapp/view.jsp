@@ -1,3 +1,4 @@
+<%@page import="org.apache.catalina.manager.util.SessionUtils"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.co.jboard1.dao.ArticleDAO"%>
 <%@page import="kr.co.jboard1.bean.ArticleBean"%>
@@ -48,7 +49,9 @@
 				
 				let article = $(this).closest('article');
 				let no = $(this).attr('data-no');
-				let jsonData = {"no": no};
+				let parent = $(this).attr('data-parent');
+				
+				let jsonData = {"no": no, "parent":parent};
 				
 				$.ajax({
 					url: '/Jboard1/proc/commentDeleteProc.jsp',
@@ -141,7 +144,7 @@
 							article += "<span class='date'>"+data.date+"</span>";
 							article += "<p class='content'>"+data.content+"</p>";
 							article += "<div>";
-							article += "<a href='#' class='remove' data-no='"+data.no+"'>삭제</a>";
+							article += "<a href='#' class='remove' data-no='"+data.no+"' data-parent='"+data.parent+"'>삭제</a>";
 							article += "<a href='#' class='modify' data-no='"+data.no+"'>수정</a>";
 							article += "</div>";
 							article += "</article>";
@@ -181,8 +184,10 @@
         </table>
         
         <div>
+        	<% if(ub.getUid().equals(article.getUid())){ %>
             <a href="/Jboard1/proc/deleteProc.jsp?no=<%= article.getNo() %>&pg=<%= pg %>" class="btn btnRemove">삭제</a>
             <a href="/Jboard1/modify.jsp?no=<%= article.getNo() %>&pg=<%= pg %>" class="btn btnModify">수정</a>
+            <% } %>
             <a href="/Jboard1/list.jsp?pg=<%= pg %>" class="btn btnList">목록</a>
         </div>
 
@@ -195,10 +200,12 @@
                 <span class="nick"><%= comment.getNick() %></span>
                 <span class="date"><%= comment.getRdate().substring(2, 10) %></span>
                 <p class="content"><%= comment.getContent() %></p>
+                <% if(ub.getUid().equals(comment.getUid())){ %>
                 <div>
-                    <a href="#" class="remove" data-no="<%= comment.getNo() %>">삭제</a>
+                    <a href="#" class="remove" data-no="<%= comment.getNo() %>" data-parent="<%= comment.getParent() %>">삭제</a>
                     <a href="#" class="modify" data-no="<%= comment.getNo() %>">수정</a>
                 </div>
+                <% } %>
             </article>
 			<% } %>
 			
