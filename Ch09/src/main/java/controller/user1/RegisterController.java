@@ -1,7 +1,6 @@
-package controller;
+package controller.user1;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.CommonService;
-import service.HelloServiceImpl;
+import service.user1.CommonService;
+import service.user1.RegisterService;
 
-@WebServlet("/hello.do")
-public class HelloController extends HttpServlet{
+@WebServlet("/user1/register.do")
+public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -24,16 +23,17 @@ public class HelloController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		requesrProc(req, resp);
+		requestProc(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		requesrProc(req, resp);
-	}	
-	public void requesrProc(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		requestProc(req, resp);
+	}
+	
+	public void requestProc(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		CommonService service = HelloServiceImpl.getInstance();
+		CommonService service = RegisterService.getInstance();
 		String view = service.requestProc(req, resp);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(view);
