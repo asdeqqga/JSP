@@ -3,20 +3,20 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>greeting</title>
-		<!-- 
-			날짜 : 2022/11/10
-			이름 : 라성준
-			내용 : JSP MVC 모델 실습하기
-		-->
+		<title>index</title>
 	</head>
 	<body>
-		<h3>MVC 기본</h3>
-		<h1>greeting</h1>
-		<a href="/Ch09/">처음으로</a>
+		<h3>MVC 실습</h3>
+		
+		<h4>MVC 실습하기</h4>
+		
 		<a href="/Ch09/hello.do">hello</a>
 		<a href="/Ch09/welcome.do">welcome</a>
 		<a href="/Ch09/greeting.do">greeting</a>
+		
+		<h4>user1 실습</h4>
+		<a href="/Ch09/user1/list.do">user1 목록</a>
+		<a href="/Ch09/user1/register.do">user1 등록</a>
 		
 	</body>
 </html>
