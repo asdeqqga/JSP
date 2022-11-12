@@ -86,7 +86,7 @@ public class User2DAO extends DBHelper{
 		public void updateUser2(User2VO vo) {
 			try {
 				conn = getConnection();
-				psmt = conn.prepareStatement("update `user1` set `name`=?, `hp`=?, `age`=? where `uid`=?");
+				psmt = conn.prepareStatement("update `user2` set `name`=?, `hp`=?, `age`=? where `uid`=?");
 				psmt.setString(1, vo.getName());
 				psmt.setString(2, vo.getHp());
 				psmt.setInt(3, vo.getAge());
