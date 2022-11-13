@@ -1,4 +1,4 @@
-package controller.user3;
+package controller.user4;
 
 import java.io.IOException;
 
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.User3DAO;
-import vo.User3VO;
+import dao.User4DAO;
+import vo.User4VO;
 
-@WebServlet("/user3/register.do")
+@WebServlet("/user4/register.do")
 public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -21,31 +21,31 @@ public class RegisterController extends HttpServlet {
 	public void init() throws ServletException {
 	}
 	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 포워드
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user3/register.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user4/register.jsp");
 		dispatcher.forward(req, resp);
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid 	= req.getParameter("uid");
-		String name = req.getParameter("name");
-		String hp 	= req.getParameter("hp");
-		String age 	= req.getParameter("age");
+		String seq 	  = req.getParameter("seq");
+		String name   = req.getParameter("name");
+		String gender = req.getParameter("gender");
+		String age 	  = req.getParameter("age");
+		String addr   = req.getParameter("addr");
 		
-		User3VO vo = new User3VO();
-		vo.setUid(uid);
+		User4VO vo = new User4VO();
+		vo.setSeq(seq);
 		vo.setName(name);
-		vo.setHp(hp);
+		vo.setGender(gender);
 		vo.setAge(age);
+		vo.setAddr(addr);
 		
-		User3DAO.getInstance().inserUser3(vo);
+		User4DAO.getInstance().inserUser4(vo);
 		
-		resp.sendRedirect("/Ch09/user3/list.do");
+		resp.sendRedirect("/Ch09/user4/list.do");
 	}
-	
-	
 
 }
