@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
+	<head>s
 		<meta charset="UTF-8">
 		<title>page 영역의 속성값 읽기</title>
 		<!-- 
