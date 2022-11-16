@@ -2,13 +2,15 @@
 <%@ include file="/_header.jsp" %>
 <%
 	String group = request.getParameter("group");
-	String cate = request.getParameter("cate");
+	String cate  = request.getParameter("cate");
 	pageContext.include("/board/_"+group+".jsp");
 %>
         <main id="board">
             <section class="modify">
 
-                <form action="#">
+                <form action="/Farmstory1/proc/modifyProc.jsp" method="post">
+                    <input type="hiddend" name="group" value="<%= group %>"/>
+                    <input type="hiddend" name="cate" value="<%= cate %>"/>
                     <table border="0">
                         <caption>글수정</caption>
                         <tr>
@@ -30,7 +32,7 @@
                     </table>
                     
                     <div>
-                        <a href="./view.html" class="btn btnCancel">취소</a>
+                        <a href="./view.jsp?group=<%= group %>&cate=<%= cate %>" class="btn btnCancel">취소</a>
                         <input type="submit" value="작성완료" class="btn btnComplete"/>
                     </div>
                 </form>

@@ -1,6 +1,6 @@
-package vo;
+package kr.co.farmstory1.bean;
 
-public class user {
+public class UserBean {
 	
 	private String uid;
 	private String pass;
@@ -88,4 +88,8 @@ public class user {
 		this.rdate = rdate;
 	}
 	
+	@Override
+	public String toString() {
+		return "uid : "+uid+", name : "+name;
+	}
 }
