@@ -1,37 +1,72 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.co.farmstory1.bean.ArticleBean"%>
+<%@page import="kr.co.farmstory1.dao.ArticleDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/_header.jsp" %>
 <%
+	request.setCharacterEncoding("utf-8");
 	String group = request.getParameter("group");
 	String cate  = request.getParameter("cate");
+	String no  = request.getParameter("no");
+	String pg  = request.getParameter("pg");
+	
 	pageContext.include("/board/_"+group+".jsp");
+	
+	ArticleDAO dao = ArticleDAO.getInstance();
+	
+	// 조회수 +1
+	dao.updateArticleHit(no);
+	
+	// 글 가져오기
+	ArticleBean article = dao.selectArticle(no);
+	
+	// 댓글 가져오기
+	List<ArticleBean> comments = dao.selectComments(no);
 %>
+<script>
+	$(document).ready(function() {
+		
+		// 글 삭제
+		$('.btnRemove').click(function(){
+			let isDelete = confirm('정말 삭제 하시겠습니까?');
+			if(isDelete){
+				return true;
+			}else{
+				return false;
+		}
+		
+	});
+</script>
         <main id="board">
             <section class="view">
-                
                 <table border="0">
                     <caption>글보기</caption>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="title" value="제목입니다." readonly/></td>
+                        <td><input type="text" name="title" readonly value="<%= article.getTitle() %>" /></td>
                     </tr>
+                    <% if(article.getFile() > 0){ %>
                     <tr>
                         <th>파일</th>
-                        <td><a href="#">2020년 상반기 매출자료.xls</a>&nbsp;<span>7</span>회 다운로드</td>
+                        <td><a href="/Farmstory1/board/proc/download.jsp?parent=<%= article.getNo() %>"><%= article.getOriName() %></a>&nbsp;<span><%= article.getDownload() %></span>회 다운로드</td>
                     </tr>
+                   	<% } %>
                     <tr>
                         <th>내용</th>
                         <td>
-                            <textarea name="content" readonly>내용 샘플입니다.</textarea>
+                            <textarea name="content" readonly><%= article.getContent() %></textarea>
                         </td>
                     </tr>                    
                 </table>
-                
+                  
                 <div>
-                    <a href="#" class="btn btnRemove">삭제</a>
+                	
+                    <a href="/Farmstory1/board/proc/deleteProc.jsp?no=<%= article.getNo() %>&pg=<%= pg %>" class="btn btnRemove">삭제</a>
                     <a href="./modify.jsp?group=<%= group %>&cate=<%= cate %>" class="btn btnModify">수정</a>
+                   	
                     <a href="./list.jsp?group=<%= group %>&cate=<%= cate %>" class="btn btnList">목록</a>
                 </div>
-
+				
                 <!-- 댓글목록 -->
                 <section class="commentList">
                     <h3>댓글목록</h3>                   

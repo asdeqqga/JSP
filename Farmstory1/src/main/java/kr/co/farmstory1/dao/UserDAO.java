@@ -18,7 +18,14 @@ public enum UserDAO {
 	INSTANCE;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void insertUser() {}
+	public void insertUser() {
+		try {
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public TermsBean selectTerms() {
 		
@@ -80,7 +87,9 @@ public enum UserDAO {
 		return ub;
 	}
 	
-	public void selectUsers() {}
+	public void selectUsers() {
+		
+	}
 	public void updateUser() {}
 	public void deleteUser() {}
 	

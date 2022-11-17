@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/_header.jsp" %>
-<%@ include filr="/board/_event.jsp" %>
 <div id="sub">
     <div><img src="../img/sub_top_tit4.png" alt="CROP TALK"></div>
     <section class="cate4">
