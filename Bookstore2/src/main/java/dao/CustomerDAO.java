@@ -1,0 +1,64 @@
+package dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import db.DBHelper;
+import vo.CustomerVO;
+
+public class CustomerDAO extends DBHelper {
+	
+	private static CustomerDAO instance = new CustomerDAO();
+	public static CustomerDAO getInstance() {
+		return instance;
+	}
+	private CustomerDAO () {}
+	
+	public void insertCustomer(CustomerVO vo) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("insert into `customer` values (?,?,?,?)");
+			psmt.setInt(1, vo.getCustId());
+			psmt.setString(2, vo.getName());
+			psmt.setString(3, vo.getAddress());
+			psmt.setString(4, vo.getPhone());
+			psmt.executeUpdate();
+			
+			close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<CustomerVO> selectCustomers() {
+		
+		List<CustomerVO> customers = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select * from `customer`");
+			
+			while(rs.next()) {
+				CustomerVO vo = new CustomerVO();
+				vo.setCustId(rs.getInt(1));
+				vo.setName(rs.getString(2));
+				vo.setAddress(rs.getString(3));
+				vo.setPhone(rs.getString(4));
+				customers.add(vo);
+			}
+			
+			close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return customers;
+		
+		
+		
+		
+		
+	}
+}
