@@ -22,12 +22,12 @@
 			<c:forEach var="book" items="${requestScope.books}">
 				<tr>
 					<td>${book.bookId}</td>
-					<td>${book.bookname}</td>
+					<td>${book.bookName}</td>
 					<td>${book.publisher}</td>
 					<td>${book.price}</td>
 					<td>
-						<a href="/Bookstore2/book/modify.do?bookId=${books.bookId}">수정</a>
-						<a href="/Bookstore2/book/delete.do?bookId=${books.bookId}">삭제</a>
+						<a href="/Bookstore2/book/modify.do?bookId=${book.bookId}">수정</a>
+						<a href="/Bookstore2/book/delete.do?bookId=${book.bookId}">삭제</a>
 					</td>				
 				</tr>
 			</c:forEach>

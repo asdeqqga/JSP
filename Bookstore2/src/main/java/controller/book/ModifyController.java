@@ -36,22 +36,22 @@ public class ModifyController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String bookId = req.getParameter("bookId");
-		String booname = req.getParameter("bookname");
+		String bookName = req.getParameter("bookName");
 		String publisher = req.getParameter("publisher");
 		String price = req.getParameter("price");
 		
 		BookVO vo = new BookVO();
 		vo.setBookId(bookId);
-		vo.setBookname(booname);
+		vo.setBookName(bookName);
 		vo.setPublisher(publisher);
 		vo.setPrice(price);
 		
 		BookDAO.getInstance().updateBook(vo);
 		
+		//리다이렉트
 		resp.sendRedirect("/Bookstore2/book/list.do");
 	}
-	
-	
-	
+
+
 	
 }

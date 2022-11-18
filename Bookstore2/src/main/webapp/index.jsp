@@ -8,7 +8,7 @@
 	<body>
 		<h3>BookStroes</h3>
 		
-		<a href="/Bookstore2/book.do">도서목록</a>
-		<a href="/Bookstore2/customer.do">고객목록</a>	
+		<a href="/Bookstore2/book/list.do">도서목록</a>
+		<a href="/Bookstore2/customer/list.do">고객목록</a>	
 	</body>
 </html>

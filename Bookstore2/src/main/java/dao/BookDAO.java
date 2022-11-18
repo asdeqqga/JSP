@@ -20,9 +20,12 @@ public class BookDAO extends DBHelper {
 			conn = getConnection();
 			psmt = conn.prepareStatement("insert into `book` values(?,?,?,?)");
 			psmt.setInt(1, vo.getBookId());
-			psmt.setString(2, vo.getBookname());
+			psmt.setString(2, vo.getBookName());
 			psmt.setString(3, vo.getPublisher());
 			psmt.setInt(4, vo.getPrice());
+			psmt.executeUpdate();
+			
+			close();
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -42,7 +45,7 @@ public class BookDAO extends DBHelper {
 			if(rs.next()) {
 				vo = new BookVO();
 				vo.setBookId(rs.getInt(1));
-				vo.setBookname(rs.getString(2));
+				vo.setBookName(rs.getString(2));
 				vo.setPublisher(rs.getString(3));
 				vo.setPrice(rs.getInt(4));
 			}
@@ -59,7 +62,7 @@ public class BookDAO extends DBHelper {
 			conn = getConnection();
 			psmt = conn.prepareStatement("update `book` set `bookname`=?, `publisher`=?, `price`=? where `bookId`=?");
 			psmt.setInt(1, vo.getBookId());
-			psmt.setString(2, vo.getBookname());
+			psmt.setString(2, vo.getBookName());
 			psmt.setString(3, vo.getPublisher());
 			psmt.setInt(4, vo.getPrice());
 			psmt.executeUpdate();
@@ -82,7 +85,7 @@ public class BookDAO extends DBHelper {
 				while(rs.next()) {
 					BookVO vo = new BookVO();
 					vo.setBookId(rs.getInt(1));
-					vo.setBookname(rs.getString(2));
+					vo.setBookName(rs.getString(2));
 					vo.setPublisher(rs.getString(3));
 					vo.setPrice(rs.getInt(4));
 					books.add(vo);
