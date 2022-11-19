@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.BookDAO;
 import vo.BookVO;
 
-
-
 @WebServlet("/book/register.do")
 public class RegisterController extends HttpServlet {
 
@@ -34,18 +32,18 @@ public class RegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String bookId  = req.getParameter("bookId");
 		String bookName = req.getParameter("bookName");
-		String publisher   = req.getParameter("publisher");
-		String price  = req.getParameter("price");
+		String publisher = req.getParameter("publisher");
+		String price = req.getParameter("price");
 		
 		BookVO vo = new BookVO();
 		vo.setBookId(bookId);
 		vo.setBookName(bookName);
 		vo.setPublisher(publisher);
 		vo.setPrice(price);
-	
+				
 		BookDAO.getInstance().insertBook(vo);
 		
-		// 리다이렉트
-		resp.sendRedirect("/Bookstroe2/book/list.do");		
+		//리다이렉트
+		resp.sendRedirect("/Bookstore2/book/list.do");
 	}
 }

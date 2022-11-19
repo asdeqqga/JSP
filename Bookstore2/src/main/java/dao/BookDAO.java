@@ -18,7 +18,7 @@ public class BookDAO extends DBHelper {
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement("insert into `book` values(?,?,?,?)");
+			psmt = conn.prepareStatement("insert into `book` values (?,?,?,?)");
 			psmt.setInt(1, vo.getBookId());
 			psmt.setString(2, vo.getBookName());
 			psmt.setString(3, vo.getPublisher());
@@ -61,10 +61,10 @@ public class BookDAO extends DBHelper {
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement("update `book` set `bookname`=?, `publisher`=?, `price`=? where `bookId`=?");
-			psmt.setInt(1, vo.getBookId());
-			psmt.setString(2, vo.getBookName());
-			psmt.setString(3, vo.getPublisher());
-			psmt.setInt(4, vo.getPrice());
+			psmt.setString(1, vo.getBookName());
+			psmt.setString(2, vo.getPublisher());
+			psmt.setInt(3, vo.getPrice());
+			psmt.setInt(4, vo.getBookId());
 			psmt.executeUpdate();
 			close();
 			

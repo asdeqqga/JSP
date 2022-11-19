@@ -9,29 +9,32 @@
 	<body>
 		<h3>Book 목록</h3>
 		<a href="/Bookstore2/">처음으로</a>
-		<a href="/Bookstore2/book/register.do">book 등록</a>
+		<a href="/Bookstore2/book/list.do">book 등록</a>
 		
+		<form action="/Bookstore2/book/modify.do" method="post">
 		<table border="1">
 			<tr>
-				<th>도서번호</th>
-				<th>도서명</th>
-				<th>출판사</th>
-				<th>가격</th>
-				<th>관리</th>
+				<td>도서번호</td>
+				<td><input type="text" name="bookId" value="${vo.bookId}"></td>
 			</tr>
-			<c:forEach var="book" items="${requestScope.bookIds}">
-				<tr>
-					<td>${book.bookId}</td>
-					<td>${book.bookname}</td>
-					<td>${book.publisher}</td>
-					<td>${book.price}</td>
-					<td>
-						<a href="/Bookstore2/book/modify.do?bookId=${books.bookId}">수정</a>
-						<a href="/Bookstore2/book/delete.do?bookId=${books.bookId}">삭제</a>
-					</td>				
-				</tr>
-			</c:forEach>
+			<tr>
+				<td>도서명</td>
+				<td><input type="text" name="bookName" value="${vo.bookName}"></td>
+			</tr>
+			<tr>
+				<td>출판사</td>
+				<td><input type="text" name="publisher" value="${vo.publisher}"></td>
+			</tr>
+			<tr>
+				<td>가격</td>
+				<td><input type="text" name="price" value="${vo.price}"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+				<input type="submit" value="수정하기">
+				</td>
+			</tr>
 		</table>
-		
+		</form>
 	</body>
 </html>

@@ -52,6 +52,4 @@ public class ModifyController extends HttpServlet {
 		resp.sendRedirect("/Bookstore2/book/list.do");
 	}
 
-
-	
 }
