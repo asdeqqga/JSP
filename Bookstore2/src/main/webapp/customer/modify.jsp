@@ -6,35 +6,35 @@
 		<title>customer::modify</title>
 	</head>
 	<body>
-		<h3>customer 수정</h3>
+		<h3>고객수정</h3>
+		
 		<a href="/Bookstore2/">처음으로</a>
-		<a href="/Bookstore2/customer/list.do">customer 목록</a>
+		<a href="/Bookstore2/customer/list.do">고객목록</a>
 		
 		<form action="/Bookstore2/customer/modify.do" method="post">
 			<table border="1">
 				<tr>
-					<td>고객목록</td>
-					<td><input type="text" name="custId" readonly value="${vo.custId}"/></td>
+					<th>고객번호</th>
+					<td><input type="text" name="custId" readonly="readonly" value="${ vo.custId }"></td>
 				</tr>
 				<tr>
-					<td>고객명</td>
-					<td><input type="text" name="name" value="${vo.name}"/></td>
+					<th>고객명</th>
+					<td><input type="text" name="name" value="${ vo.name }"></td>
 				</tr>
 				<tr>
-					<td>주소</td>
-					<td><input type="text" name="address" value="${vo.address}"/></td>
+					<th>주소</th>
+					<td><input type="text" name="address" value="${ vo.address }"></td>
 				</tr>
 				<tr>
-					<td>휴대폰</td>
-					<td><input type="number" name="phone" value="${vo.phone}"/></td>
+					<th>휴대폰</th>
+					<td><input type="text" name="phone" value="${ vo.phone }"></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="right">
-						<input type="submit" value="수정하기"/>
+						<input type="submit" value="등록하기">
 					</td>
 				</tr>
 			</table>
 		</form>
-		
 	</body>
 </html>

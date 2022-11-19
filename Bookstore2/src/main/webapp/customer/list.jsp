@@ -8,8 +8,8 @@
 	</head>
 	<body>
 		<h3>고객목록</h3>
-		<a href="/BookStore2/">처음으로</a>
-		<a href="/BookStore2/customer/register.do">customer 등록</a>
+		<a href="/Bookstore2/">처음으로</a>
+		<a href="/Bookstore2/customer/register.do">회원등록</a>
 		
 		<table border="1">
 			<tr>
@@ -26,7 +26,7 @@
 					<td>${customer.address}</td>
 					<td>${customer.phone}</td>
 					<td>
-						<a href="/Bookstore2/customer/modify.do?cusiId=${customer.custId}">수정</a>
+						<a href="/Bookstore2/customer/modify.do?custId=${customer.custId}">수정</a>
 						<a href="/Bookstore2/customer/delete.do?custId=${customer.custId}">삭제</a>
 					</td>				
 				</tr>

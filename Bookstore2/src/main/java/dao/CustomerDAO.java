@@ -17,11 +17,10 @@ public class CustomerDAO extends DBHelper {
 	public void insertCustomer(CustomerVO vo) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement("insert into `customer` values (?,?,?,?)");
-			psmt.setInt(1, vo.getCustId());
-			psmt.setString(2, vo.getName());
-			psmt.setString(3, vo.getAddress());
-			psmt.setString(4, vo.getPhone());
+			psmt = conn.prepareStatement("insert into `customer` (`name`,`address`,`phone`) values (?,?,?)");
+			psmt.setString(1, vo.getName());
+			psmt.setString(2, vo.getAddress());
+			psmt.setString(3, vo.getPhone());
 			psmt.executeUpdate();
 			
 			close();
@@ -55,10 +54,59 @@ public class CustomerDAO extends DBHelper {
 			e.printStackTrace();
 		}
 		return customers;
+	}
+	
+	public CustomerVO selectCustomer(String custId) {
 		
+		CustomerVO vo = null;
 		
-		
-		
-		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT * FROM `customer` WHERE `custId`=?");
+			psmt.setString(1, custId);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new CustomerVO();
+				vo.setCustId(rs.getInt(1));
+				vo.setName(rs.getString(2));
+				vo.setAddress(rs.getString(3));
+				vo.setPhone(rs.getString(4));
+			}
+			close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
+	}
+	
+	public void updateCustomer(CustomerVO vo) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("update `customer` set `name`=?, `address`=?, `phone`=? where `custId`=?");
+			psmt.setString(1, vo.getName());
+			psmt.setString(2, vo.getAddress());
+			psmt.setString(3, vo.getPhone());
+			psmt.setInt(4, vo.getCustId());
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteCustomer(String custId) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("delete from `customer` where `custId`=?");
+			psmt.setString(1, custId);
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
+
+

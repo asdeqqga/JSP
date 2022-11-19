@@ -98,5 +98,18 @@ public class BookDAO extends DBHelper {
 			}
 			return books;
 	}
+	
+	public void deleteBook(String bookId) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("delete from `book` where `bookId`=?");
+			psmt.setString(1, bookId);
+			psmt.executeUpdate();
+			close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 		
 }

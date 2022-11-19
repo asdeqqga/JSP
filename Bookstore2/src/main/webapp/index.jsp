@@ -6,7 +6,7 @@
 		<title>BookStore</title>
 	</head>
 	<body>
-		<h3>BookStroes</h3>
+		<h3>Bookstore</h3>
 		
 		<a href="/Bookstore2/book/list.do">도서목록</a>
 		<a href="/Bookstore2/customer/list.do">고객목록</a>	
