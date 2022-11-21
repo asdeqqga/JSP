@@ -3,7 +3,7 @@
 	<!-- 
 		날짜 : 2022/111/21
 		이름 : 라성준
-		내용 : 로그인 페이지
+		내용 : 로그인 페이지 ,P159
  	-->
  <%
  	String loginId = CookieManager.readCookie(request, "loginId");
