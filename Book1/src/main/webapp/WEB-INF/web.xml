@@ -13,4 +13,10 @@
     <param-name>INIT_PAEAM</param-name>
     <param-value>web.xml에 저장한 초기화 매개변수</param-value>
   </context-param>
+
+<!-- 세션 유지 기간 설정 -->
+<session-config>
+	<session-timeout>20</session-timeout>
+</session-config>
+
 </web-app>
