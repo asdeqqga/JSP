@@ -9,14 +9,56 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+
+<!-- 초기화 매개변수 추가하기 -->
   <context-param>
     <param-name>INIT_PAEAM</param-name>
     <param-value>web.xml에 저장한 초기화 매개변수</param-value>
   </context-param>
+<!-- 
+	날짜 : 2022/11/22
+	이름 : 라성준
+	내용 : web.xml에 에러별 출력 페이지 설정
+ -->
+	 <!-- 
+	 <error-page>
+	 	<error-code>404</error-code>
+	 	<location>/Ch02/Exception.jsp</location>
+	 </error-page>
+	 <error-page>
+	 	<error-code>405</error-code>
+	 	<location>/Ch02/Exception.jsp</location>
+	 </error-page>
+	 <error-page>
+	 	<error-code>500</error-code>
+	 	<location>/Ch02/Exception.jsp</location>
+	 </error-page>
+	  -->
+<!-- 
+	날짜 : 2022/11/22
+	이름 : 라성준
+	내용 : web.xml에 mysql 접속 정보 입력
+-->
+	<context-param>
+		<param-name>MysqlDriver</param-name>
+		<param-value>com.mysql.cj.jdbc.Driver</param-value>
+	</context-param>
+	<context-param>
+		<param-name>MysqlURL</param-name>
+		<param-value>jdbc:mysql://localhost:3306/java2_db</param-value>
+	</context-param>
+	<context-param>
+		<param-name>MysqlId</param-name>
+		<param-value>root</param-value>
+	</context-param>
+	<context-param>
+		<param-name>MysqlPwd</param-name>
+		<param-value>1234</param-value>
+	</context-param>
 
 <!-- 세션 유지 기간 설정 -->
 <session-config>
-	<session-timeout>20</session-timeout>
+	<session-timeout>10</session-timeout>
 </session-config>
 
 </web-app>
