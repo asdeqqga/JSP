@@ -1,4 +1,3 @@
-<%@page import="kr.co.jboard2.db.DBCP"%>
 <%@page import="kr.co.jboard2.db.Sql"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
