@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
-<script src="/Jboard2/js/valtdation.js"></script>
+<script src="/Jboard2/js/validation.js"></script>
 <script>
 
 $(function(){
@@ -19,11 +19,11 @@ $(function(){
 				
 				let jsonData = {
 						"uid": uid,
-						"pass": pass2,
+						"pass": pass2
 				};
 				
 				$.ajax({
-					url: '/Jborad2/user/findPwChang.do',
+					url: '/Jboard2/user/findPwChange.do',
 					method: 'post',
 					data: jsonData,
 					dataType: 'json',
@@ -40,14 +40,10 @@ $(function(){
 				
 				
 			}else{
-				isPassOk = false;
 				$('.resultPass').css('color', 'red').text('영문, 숫자, 특수문자 조합 최소 5자 이상 이어야 합니다.');
 			}				
-		
 		}else{
-			isPassOk = false;
 			$('.resultPass').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
-		
 			}			
 	});
 
