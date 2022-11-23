@@ -14,11 +14,11 @@
 			}
 			
 			let uid = $('input[name=uid]').val();
-			let name = $('input[name=email]').val();
+			let email = $('input[name=email]').val();
 			
 			let jsonData = {
-					"uid":"uid",
-					"email":"email"
+					"uid": uid,
+					"email": email
 			}
 			
 			$.ajax({

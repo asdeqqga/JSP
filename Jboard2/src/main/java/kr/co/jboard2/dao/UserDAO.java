@@ -180,7 +180,7 @@ public class UserDAO extends DBHelper {
 		return vo;
 	}
 	
-public UserVO selectUserForFindPw(String uid, String email) {
+	public UserVO selectUserForFindPw(String uid, String email) {
 		
 		UserVO vo = null;
 		
@@ -188,7 +188,7 @@ public UserVO selectUserForFindPw(String uid, String email) {
 			logger.info("selectUserForFindPw...");
 			
 			conn = getConnection();
-			conn.prepareStatement(Sql.SELECT_USER_FOR_FIND_PW);
+			psmt = conn.prepareStatement(Sql.SELECT_USER_FOR_FIND_PW);
 			psmt.setString(1, uid);
 			psmt.setString(2, email);
 			

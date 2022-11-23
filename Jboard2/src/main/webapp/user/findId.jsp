@@ -5,7 +5,7 @@
 
 	$(function(){
 		
-		$('.btnNext').click(function(e)){
+		$('.btnNext').click(function(e){
 			e.preventDefault();
 			
 			if(!isEmailAuthOk){
@@ -17,8 +17,8 @@
 			let email = $('input[name=email]').val();
 			
 			let jsonData = {
-					"name":"name",
-					"email":"email"
+					"name": name,
+					"email": email
 			}
 			
 			$.ajax({
