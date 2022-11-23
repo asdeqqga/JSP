@@ -1,22 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"/>
-<%
-	request.setCharacterEncoding("utf-8");
-	String success = request.getParameter("success");
-%>
-<script>
-	let success = "<%= success %>";
-	
-	if(success == "100"){
-		alert('일치하는 회원이 없습니다.\n아이디, 비밀번호를 다시 확인 하십시요.');
-	}else if(success == "101"){
-		alert('먼저 로그인을 하셔야 합니다.');
-	}
-</script>
 
 <main id="user">
     <section class="login">
-        <form action="../list.html">
+        <form action="/Jboard2/user/login.do" method="post">
             <table border="0">
                 <tr>
                     <td><img src="/Jboard2/img/login_ico_id.png" alt="아이디"/></td>
@@ -36,8 +23,8 @@
                 아직 회원이 아니시면 회원으로 가입하세요.
             </p>
             <div style="text-align: right;">
-                <a href="./findId.html">아이디 |</a>
-                <a href="./findPw.html">비밀번호찾기 |</a>
+                <a href="/Jboard2/user/findId.do">아이디 |</a>
+                <a href="/Jboard2/user/findPw.do">비밀번호찾기 |</a>
                 <a href="/Jboard2/user/terms.do">회원가입</a>
             </div>                    
         </div>
