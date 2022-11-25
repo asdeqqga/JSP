@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
 <main id="board">
     <section class="list">                
@@ -16,27 +17,27 @@
                 <th>날짜</th>
                 <th>조회</th>
             </tr>
-            <c:forEach var="vo" items="${ vos }" >                    
+            <c:forEach var="article" items="${articles}" >                    
             <tr>
-                <td>${ vo.no }</td>
-                <td><a href="/Jboard2/view.do">${vo.title}&nbsp;[${vo.eomment}]</a></td>
-                <td>${ vo.nick }</td>
-                <td>${ vo.rdate }</td>
-                <td>${ vo.hit }</td>
+                <td>${pageStartNum = pageStartNum - 1}</td>
+                <td><a href="/Jboard2/view.do">${article.title}[${article.comment}]</a></td>
+                <td>${article.nick}</td>
+                <td>${article.rdate.substring(2, 10)}</td>
+                <td>${article.hit}</td>
             </tr>
             </c:forEach>
         </table>
 
         <div class="page">
-        	<c:if test="${ pageGroupStart gt 1}">
-            <a href="#" class="prev">이전</a>
+        		<c:if test="${ pageGroupStart gt 1}">
+            	<a href="/Jboard2/list.do?pg=${pageGroupStart - 1}" class="prev">이전</a>
             </c:if>
-            <c:forEach var="i" begin="${ pageGroupStart }" end="${ pageGroupEnd }" step="1">
-            <a href="#" class="num current">1</a>
+            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}" step="1">
+           		<a href="/Jboard2/list.do?pg=${i}" class="num ${currentPage == i?'current':'off'}">${i}</a>
             </c:forEach>
-            <a href="#" class="num">2</a>
-            <a href="#" class="num">3</a>
-            <a href="#" class="next">다음</a>
+            <c:if test="${pageGroupEnd < lastPageNum}">
+            	<a href="/Jboard2/list.do?pg=${pageGroupEnd + 1}" class="next">다음</a>
+            </c:if>
         </div>
         <a href="/Jboard2/write.do" class="btn btnWrite">글쓰기</a>
     </section>

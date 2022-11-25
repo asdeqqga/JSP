@@ -2,9 +2,8 @@
 <jsp:include page="./_header.jsp"/>
 <main id="board">
     <section class="write">
-
-        <form action="/Jboard2/proc/writeProc.jsp" method="post" enctype="multipart/form-data">
-           
+        <form action="/Jboard2/write.do" method="post" enctype="multipart/form-data">
+           <input type="hidden" name="uid" value="${sessUser.uid}"/>
             <table border="0">
                 <caption>글쓰기</caption>
                 <tr>

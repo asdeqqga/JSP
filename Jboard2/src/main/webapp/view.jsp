@@ -7,12 +7,14 @@
             <caption>글보기</caption>
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="title" value="제목입니다." readonly/></td>
+                <td><input type="text" name="title" value="${article.title}" readonly/></td>
             </tr>
+            <c:if>
             <tr>
                 <th>파일</th>
-                <td><a href="#">2020년 상반기 매출자료.xls</a>&nbsp;<span>7</span>회 다운로드</td>
+                <td><a href="/Jboard2/view.do">%{article.NO}</a>&nbsp;<span>${article.Download}</span>회 다운로드</td>
             </tr>
+            </c:if>
             <tr>
                 <th>내용</th>
                 <td>
