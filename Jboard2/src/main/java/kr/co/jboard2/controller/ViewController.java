@@ -9,11 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import kr.co.jboard2.service.ArticleService;
+
 @WebServlet("/view.do")
 public class ViewController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	private ArticleService service = ArticleService.INSTANCE;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	public void init() throws ServletException {
 	}
