@@ -12,7 +12,7 @@
             <c:if>
             <tr>
                 <th>파일</th>
-                <td><a href="/Jboard2/view.do">%{article.NO}</a>&nbsp;<span>${article.Download}</span>회 다운로드</td>
+                <td><a href="/Jboard2/download.do?no=${article.NO}"></a>&nbsp;<span>${article.Download}</span>회 다운로드</td>
             </tr>
             </c:if>
             <tr>

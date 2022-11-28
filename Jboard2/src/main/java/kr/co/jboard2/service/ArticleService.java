@@ -31,14 +31,18 @@ public enum ArticleService {
 	public void insertFile(int parent, String newName, String fname) {
 		dao.insertFile(parent, newName, fname);
 	}
-	public int selectCountTotal() {
-		return dao.selectCountTotal();
+	public int selectCountTotal(String seach) {
+		return dao.selectCountTotal(seach);
 	}
 	
 	public void selectArticle() {}
 	
 	public List<ArticleVO> selectArticles(int limitStart) {
 		return dao.selectArticles(limitStart);
+	}
+	
+	public List<ArticleVO> selectArticlesBykeyword(String keyword, int start){
+		return dao.selectArticlesBykeyword(keyword, start);
 	}
 	
 	public void updateArticle() {}
