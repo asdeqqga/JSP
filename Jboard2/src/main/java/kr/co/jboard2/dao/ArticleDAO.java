@@ -129,30 +129,27 @@ public class ArticleDAO extends DBHelper {
 		return article;
 	}
 	
-	public int selectCountTotal(String search) {
+public int selectCountTotal(String search) {
 		
 		int total = 0;
 		
 		try {
 			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			
+			conn = getConnection();
 			
 			if(search == null) {
-				stmt = conn.createStatement();
+				stmt = conn.createStatement();			
 				rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL);
 			}else {
-				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_FOR_SEACH);
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_FOR_SEARCH);
 				psmt.setString(1, "%"+search+"%");
 				psmt.setString(2, "%"+search+"%");
 				rs = psmt.executeQuery();
 			}
 			
-			
 			if(rs.next()) {
 				total = rs.getInt(1);
 			}
-			
 			
 			close();
 		}catch (Exception e) {
@@ -245,7 +242,7 @@ public class ArticleDAO extends DBHelper {
 		return articles;
 	}
 	
-	public List<ArticleVO> selectArticlesBykeyword(String keyword, int start) {
+public List<ArticleVO> selectArticlesByKeyword(String keyword, int start) {
 		
 		List<ArticleVO> articles = new ArrayList<>();
 		
@@ -253,14 +250,14 @@ public class ArticleDAO extends DBHelper {
 			logger.info("selectArticlesByKeyword...");
 			
 			conn = getConnection();
-			conn.prepareStatement(Sql.SELECT_ARTICLES_BY_KEYWORD);
+			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_KEYWORD);
 			psmt.setString(1, "%"+keyword+"%");
 			psmt.setString(2, "%"+keyword+"%");
 			psmt.setInt(3, start);
 			
 			rs = psmt.executeQuery();
 			
-			while(rs.next()){
+			while(rs.next()) {
 				ArticleVO article = new ArticleVO();
 				article.setNo(rs.getInt(1));
 				article.setParent(rs.getInt(2));
@@ -279,14 +276,14 @@ public class ArticleDAO extends DBHelper {
 			}
 			close();
 			
-			rs = psmt.executeQuery();
-			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		return articles;
 		
+		return articles;
 	}
+		
+	
 	
 	public FileVO selectFile(String parent) {
 		FileVO fb = null;

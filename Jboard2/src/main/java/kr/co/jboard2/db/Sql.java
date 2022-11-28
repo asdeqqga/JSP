@@ -55,7 +55,7 @@ public class Sql {
 	
 	public static final String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `board_article`";
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `board_article`  WHERE `parent`=0";
-	public static final String SELECT_COUNT_TOTAL_FOR_SEACH = "SELECT COUNT(`no`) FROM `board_article` AS a "
+	public static final String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(`no`) FROM `board_article` AS a "
 															+ "JOIN `border_user` AS b ON a .uid = b.uid "
 															+ "WHERE `parent`=0 AND (`title` LIKE ? OR `nick` LIKE ?)";
 

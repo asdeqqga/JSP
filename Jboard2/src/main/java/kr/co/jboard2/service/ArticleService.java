@@ -42,7 +42,7 @@ public enum ArticleService {
 	}
 	
 	public List<ArticleVO> selectArticlesBykeyword(String keyword, int start){
-		return dao.selectArticlesBykeyword(keyword, start);
+		return dao.selectArticlesByKeyword(keyword, start);
 	}
 	
 	public void updateArticle() {}
