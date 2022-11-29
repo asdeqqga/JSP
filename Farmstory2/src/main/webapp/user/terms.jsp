@@ -7,7 +7,7 @@
             <caption>사이트 이용약관</caption>
             <tr>
                 <td>
-                    <textarea name="terms">약관내용</textarea>
+                    <textarea name="terms"></textarea>
                     <label><input type="checkbox" class="terms">&nbsp;동의합니다.</label>
                 </td>
             </tr>
@@ -24,8 +24,8 @@
         </table>
         
         <div>
-            <a href="/Farmstory2/user/login.do" class="btn btnCancel">취소</a>
-            <a href="/Farmstory2/user/register.do" class="btn btnNext">다음</a>
+            <a href="./login.do" class="btn btnCancel">취소</a>
+            <a href="./register.do" class="btn btnNext">다음</a>
         </div>
 
     </section>

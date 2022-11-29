@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../_header.jsp"/>
+<script src="/Farmstory2/js/validation.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/Farmstory2/js/zipcode.js"></script>
 <main id="user">
     <section class="register">
 
@@ -72,7 +75,7 @@
             </table>
 
             <div>
-                <a href="/Farmstory2/index.do" class="btn btnCancel">취소</a>
+                <a href="./login.do" class="btn btnCancel">취소</a>
                 <input type="submit" value="회원가입" class="btn btnRegister"/>
             </div>
 

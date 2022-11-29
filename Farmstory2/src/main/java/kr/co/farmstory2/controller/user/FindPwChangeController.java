@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/FindPwChange.do")
+@WebServlet("/user/findPwChange.do")
 public class FindPwChangeController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class FindPwChangeController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/FindPwChange.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPwChange.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
