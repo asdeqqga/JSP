@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +14,7 @@ import kr.co.farmstory2.db.DBHelper;
 import kr.co.farmstory2.db.Sql;
 import kr.co.farmstory2.vo.ArticleVO;
 import kr.co.farmstory2.vo.FileVO;
+
 
 
 // DAO(Data Access Object) : 데이터베이스 처리 클래스
@@ -205,50 +204,6 @@ public int selectCountTotal(String search) {
 		return article;
 	}
 	
-	/**
-	 * 게시물 보기
-	 * @param no
-	 * @return
-	 */
-	
-	public Map<String, Object> selectArticle2(String no){
-		Map<String, Object> vos = new HashMap<>();
-		ArticleVO avo = new ArticleVO();
-		try {
-			logger.info("selectArticle...");
-			conn = getConnection();
-			
-			psmt = conn.prepareStatement(Sql.SELECT_ARTICLE);
-			psmt.setString(1, no);
-			rs = psmt.executeQuery();
-			
-			if(rs.next()) {
-				avo.setNo(rs.getInt(1));
-				avo.setParent(rs.getInt(2));
-				avo.setComment(rs.getInt(3));
-				avo.setCate(rs.getString(4));
-				avo.setTitle(rs.getString(5));
-				avo.setContent(rs.getString(6));
-				avo.setFile(rs.getInt(7));
-				avo.setHit(rs.getInt(8));
-				avo.setUid(rs.getString(9));
-				avo.setRegip(rs.getString(10));
-				avo.setRdate(rs.getString(11));
-				//fvo.setFno(rs.getInt(12));
-				//fvo.setParent(rs.getInt(13));
-				//fvo.setNewName(rs.getString(14));
-				//fvo.setOriName(rs.getString(15));
-				//fvo.setDownload(rs.getInt(16));
-			}
-			close();
-			
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		vos.put("avo",avo);
-		//vos.put("fvo", fvo);
-		return vos;
-	}
 	
 	public List<ArticleVO> selectArticles(int limitStart) {
 		

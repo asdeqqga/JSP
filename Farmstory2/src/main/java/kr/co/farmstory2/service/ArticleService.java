@@ -16,6 +16,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.farmstory2.dao.ArticleDAO;
 import kr.co.farmstory2.vo.ArticleVO;
 
+
+
 public enum ArticleService {
 
 	INSTANCE;
@@ -34,10 +36,6 @@ public enum ArticleService {
 	}
 	public int selectCountTotal(String search) {
 		return dao.selectCountTotal(search);
-	}
-	
-	public Map<String, Object> selectArticle(String no) {
-		return dao.selectArticle2(no);
 	}
 	
 	public List<ArticleVO> selectArticles(int limitStart) {

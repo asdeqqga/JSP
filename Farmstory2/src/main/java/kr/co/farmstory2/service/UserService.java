@@ -18,6 +18,8 @@ import kr.co.farmstory2.dao.UserDAO;
 import kr.co.farmstory2.vo.TermsVO;
 import kr.co.farmstory2.vo.UserVO;
 
+
+
 public enum UserService {
 	
 	INSTANCE;

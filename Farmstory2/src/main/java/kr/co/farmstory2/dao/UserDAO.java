@@ -8,6 +8,8 @@ import kr.co.farmstory2.db.Sql;
 import kr.co.farmstory2.vo.TermsVO;
 import kr.co.farmstory2.vo.UserVO;
 
+
+
 public class UserDAO extends DBHelper {
 	
 
