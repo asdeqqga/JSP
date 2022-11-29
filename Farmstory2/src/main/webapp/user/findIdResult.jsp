@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
+<jsp:include page="../_header.jsp"/>
 <main id="user">
     <section class="find findIdResult">
         <form action="#">
@@ -7,19 +7,19 @@
                 <caption>아이디 찾기 결과</caption>
                 <tr>
                     <td>이름</td>
-                    <td>${sessUserForId.name}</td>
+                    <td>홍길동</td>
                 </tr>
                 <tr>
                     <td>아이디</td>
-                    <td>${sessUserForId.uid}</td>
+                    <td>hongg</td>
                 </tr>
                 <tr>
                     <td>이메일</td>
-                    <td>${sessUserForId.email}</td>
+                    <td>hong@gmail.com</td>
                 </tr>
                 <tr>
                     <td>가입일</td>
-                    <td>${sessUserForId.rdate}</td>
+                    <td>2022-11-16 10:20</td>
                 </tr>
             </table>                                        
         </form>
@@ -34,3 +34,4 @@
         </div>
     </section>
 </main>
+<jsp:include page="../_footer.jsp"/>

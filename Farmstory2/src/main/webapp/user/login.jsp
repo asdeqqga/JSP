@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
+<jsp:include page="../_header.jsp"/>
 <main id="user">
     <section class="login">
         <form action="/Jboard2/user/login.do" method="post">
@@ -29,3 +29,4 @@
         </div>
     </section>
 </main>
+<jsp:include page="../_footer.jsp"/>

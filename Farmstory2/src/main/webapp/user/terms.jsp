@@ -1,9 +1,5 @@
-
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
+<jsp:include page="../_header.jsp"/>
 
 <main id="user">
     <section class="terms">
@@ -11,7 +7,7 @@
             <caption>사이트 이용약관</caption>
             <tr>
                 <td>
-                    <textarea name="terms">${vo.terms}</textarea>
+                    <textarea name="terms">약관내용</textarea>
                     <label><input type="checkbox" class="terms">&nbsp;동의합니다.</label>
                 </td>
             </tr>
@@ -21,7 +17,7 @@
             <caption>개인정보 취급방침</caption>
             <tr>
                 <td>
-                    <textarea name="privacy">${vo.privacy}</textarea>
+                    <textarea name="privacy">약관내용</textarea>
                     <label><input type="checkbox" class="privacy">&nbsp;동의합니다.</label>
                 </td>
             </tr>
@@ -34,3 +30,4 @@
 
     </section>
 </main>
+<jsp:include page="../_footer.jsp"/>

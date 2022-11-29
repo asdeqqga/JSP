@@ -1,13 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
-<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/Jboard2/js/zipcode.js"></script>
-<script src="/Jboard2/js/validation.js"></script>
-
+<jsp:include page="../_header.jsp"/>
 <main id="user">
     <section class="register">
 
-        <form action="/Jboard2/user/register.do" method="post">
+        <form action="#" method="post">
             <table border="1">
                 <caption>사이트 이용정보 입력</caption>
                 <tr>
@@ -84,3 +80,4 @@
 
     </section>
 </main>
+<jsp:include page="../_footer.jsp"/>
