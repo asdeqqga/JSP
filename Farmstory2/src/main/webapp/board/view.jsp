@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <th>파일</th>
-                <td><a href="/farmstory2/download.do?no=${article.NO}"></a>&nbsp;<span>7</span>회 다운로드</td>
+                <td><a href="/Farmstory2/download.do?no=${article.NO}"></a>&nbsp;<span>7</span>회 다운로드</td>
             </tr>
             <tr>
                 <th>내용</th>
