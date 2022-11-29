@@ -1,4 +1,4 @@
-package java.kr.co.farmstory2.controller;
+package kr.co.farmstory2.controller;
 
 import java.io.IOException;
 

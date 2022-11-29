@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<script src="/Jboard2/js/emailAuth.js"></script>
+<script src="/Farmstory2/js/emailAuth.js"></script>
 <jsp:include page="../_header.jsp"/>
 <main id="user">
     <section class="find findId">
@@ -33,8 +33,8 @@
         </p>
 
         <div>
-            <a href="/Jboard2/user/login.do" class="btn btnCancel">취소</a>
-            <a href="/Jboard2/user/findIdResult.do" class="btn btnNext">다음</a>
+            <a href="/Farmstory2/user/login.do" class="btn btnCancel">취소</a>
+            <a href="/Farmstory2/user/findIdResult.do" class="btn btnNext">다음</a>
         </div>
     </section>
 </main>
