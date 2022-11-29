@@ -32,10 +32,10 @@ public class LoginCheckFilter implements Filter {
 		
 		// 필터를 동작할 요청주소 리스트 구성
 		uriList = new ArrayList<>();
-		uriList.add("/farmstroy2/list.do");
-		uriList.add("/farmstroy2/write.do");
-		uriList.add("/farmstroy2/modify.do");
-		uriList.add("/farmstroy2/view.do");
+		uriList.add("/Farmstroy2/list.do");
+		uriList.add("/Farmstroy2/write.do");
+		uriList.add("/Farmstroy2/modify.do");
+		uriList.add("/Farmstroy2/view.do");
 		
 	}
 	
@@ -53,7 +53,7 @@ public class LoginCheckFilter implements Filter {
 		
 		// 로그인을 하지 않았을 경우
 		if(sessUser == null) {
-			((HttpServletResponse) response).sendRedirect("/farmstroy2/user/login.do");
+			((HttpServletResponse) response).sendRedirect("/Farmstroy2/user/login.do");
 			return;
 			
 			}
@@ -61,7 +61,7 @@ public class LoginCheckFilter implements Filter {
 		}else if(uri.contains("/user/login.do")) {
 			// 로그인을 했을 경우
 			if(sessUser != null) {
-				((HttpServletResponse) response).sendRedirect("/farmstroy2/list.do");
+				((HttpServletResponse) response).sendRedirect("/Farmstroy2/list.do");
 				return;
 			}
 		}
