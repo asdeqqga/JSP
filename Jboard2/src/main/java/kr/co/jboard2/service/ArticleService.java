@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,9 @@ public enum ArticleService {
 		return dao.selectCountTotal(seach);
 	}
 	
-	public void selectArticle() {}
+	public Map<String, Object> selectArticle(String no) {
+		return dao.selectArticle2(no);
+	}
 	
 	public List<ArticleVO> selectArticles(int limitStart) {
 		return dao.selectArticles(limitStart);
