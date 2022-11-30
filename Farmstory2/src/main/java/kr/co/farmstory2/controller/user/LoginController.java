@@ -15,7 +15,7 @@ import kr.co.farmstory2.service.UserService;
 import kr.co.farmstory2.vo.UserVO;
 
 @WebServlet("/user/login.do")
-public class LoingController extends HttpServlet {
+public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private UserService service = UserService.INSTANCE;
