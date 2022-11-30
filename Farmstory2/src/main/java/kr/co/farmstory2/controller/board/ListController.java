@@ -61,6 +61,7 @@ public class ListController extends HttpServlet {
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
 		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/list.jsp");
 		dispatcher.forward(req, resp);
 		

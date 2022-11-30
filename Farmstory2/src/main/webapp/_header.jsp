@@ -34,12 +34,12 @@
             <p>
                 <a href="/Farmstory2/">HOME |</a>
                 <c:choose>
-               		<c:when test="${ sessUser.uid eq null }">
+               		<c:when test="${sessUser.uid eq null}">
                 		<a href="/Farmstory2/user/login.do">로그인 |</a>
                 		<a href="/Farmstory2/user/terms.do">회원가입 |</a>
                 	</c:when>
                 	<c:otherwise>
-                <span></span>님 |
+                <span>${sessUser.nick}</span>님 |
                 <a href="/Farmstory2/user/logout.do">로그아웃 |</a>
                 	</c:otherwise>
                 </c:choose>

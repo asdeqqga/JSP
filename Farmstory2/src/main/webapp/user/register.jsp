@@ -6,7 +6,7 @@
 <main id="user">
     <section class="register">
 
-        <form action="#" method="post">
+        <form action="/Farmstory2/board/register.do" method="post">
             <table border="1">
                 <caption>사이트 이용정보 입력</caption>
                 <tr>
