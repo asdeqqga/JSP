@@ -67,7 +67,7 @@
                     <td>주소</td>
                     <td>
                         <input type="text" name="zip" id="zip" placeholder="우편번호 검색" readonly/>
-                        <button type="button" onclick="zipcode()"><img src="/Farmstory2/img/chk_post.gif" alt="우편번호찾기"/></button>
+                        <button type="button" onclick="zipcode()"><img src="./img/chk_post.gif" alt="우편번호찾기"/></button>
                         <input type="text" name="addr1" id="addr1" placeholder="기본주소 검색" readonly/>
                         <input type="text" name="addr2" id="addr2" placeholder="상세주소 입력"/>
                     </td>
