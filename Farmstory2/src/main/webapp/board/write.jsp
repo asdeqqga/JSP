@@ -4,7 +4,9 @@
 <main id="board">
     <section class="write">
 
-        <form action="#">
+        <form action="./write.do?" method="post" enctype="multipart/form-data">
+        	<input type="hidden" name="cate" value="${cate}">
+        	<input type="hidden" name="tit" value="${group}">
             <table border="0">
                 <caption>글쓰기</caption>
                 <tr>

@@ -28,21 +28,22 @@ public class ArticleDAO extends DBHelper {
 		int parent = 0;
 		
 		try{
-			Connection conn = getConnection();
+			logger.info("insertArticle...");
 			// 트랜젝션 시작
+			conn = getConnection();
 			conn.setAutoCommit(false);
 			
-			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
-			Statement stmt = conn.createStatement();
+			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
+			stmt = conn.createStatement();
 			
-			psmt.setString(1, article.getTitle());
-			psmt.setString(2, article.getContent());
-			psmt.setInt(3, article.getFname() == null ? 0 : 1);
-			psmt.setString(4, article.getUid());
-			psmt.setString(5, article.getRegip());
-			
+			psmt.setString(1, article.getCate());
+			psmt.setString(2, article.getTitle());
+			psmt.setString(3, article.getContent());
+			psmt.setInt(4, article.getFname() == null ? 0 : 1);
+			psmt.setString(5, article.getUid());
+			psmt.setString(6, article.getRegip());
 			psmt.executeUpdate();
-			ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_NO);
+			rs = stmt.executeQuery(Sql.SELECT_MAX_NO);
 			
 			// 작업확정
 			conn.commit();
@@ -51,10 +52,7 @@ public class ArticleDAO extends DBHelper {
 				parent = rs.getInt(1);
 			}
 			
-			rs.close();
-			stmt.close();
-			psmt.close();
-			conn.close();
+			close();
 			
 		}catch(Exception e){
 			e.printStackTrace();

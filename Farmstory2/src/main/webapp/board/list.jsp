@@ -3,7 +3,7 @@
 <jsp:include page="./_${group}.jsp"/>
 <main id="board">
     <section class="list">                
-        <form action="#">
+        <form action="/Farmstory2/board/list.do?">
             <input type="text" name="search" placeholder="제목 키워드, 글쓴이 검색">
             <input type="submit" value="검색">
         </form>

@@ -1,10 +1,10 @@
 /**
  * 
  */
- let preventDoubleClick = false;
- let isEmailAuthOk = false;
+let preventDoubleClick = false;
+let isEmailAuthOk = false;
  
- $(function(){
+$(function(){
 	
 	// 이메일 인증코드 발송 클릭
 	$('#btnEmail').click(function(){

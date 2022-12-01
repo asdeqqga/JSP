@@ -50,6 +50,7 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 		
 		List<ArticleVO> articles = null;
+		
 			if(search == null) {
 				articles = service.selectArticles(start);
 			}else {
@@ -60,6 +61,7 @@ public class ListController extends HttpServlet {
 		req.setAttribute("articles", articles);
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
+		
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/list.jsp");

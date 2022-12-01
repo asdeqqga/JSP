@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/findeIdResult.do")
+@WebServlet("/user/findIdResult.do")
 public class FindIdResultController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
