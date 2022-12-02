@@ -62,7 +62,7 @@ public class RegisterController extends HttpServlet {
 		service.insertUser(vo);
 		
 		// 리다이렉트
-		resp.sendRedirect("Farmstory2/user/login.do");
+		resp.sendRedirect("/Farmstory2/user/login.do");
 		
 	}
 }

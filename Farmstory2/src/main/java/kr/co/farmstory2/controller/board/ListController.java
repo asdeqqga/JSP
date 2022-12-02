@@ -54,16 +54,20 @@ public class ListController extends HttpServlet {
 			if(search == null) {
 				articles = service.selectArticles(start);
 			}else {
-				articles = service.selectArticlesBykeyword(search, start);
-			}
-				
+				articles = service.selectArticlesBykeyword(cate, search, start);
+			}			
 		
-		req.setAttribute("articles", articles);
-		req.setAttribute("group", group);
-		req.setAttribute("cate", cate);
-		
-		
-		
+			req.setAttribute("articles", articles);
+			req.setAttribute("currentPage", currentPage);
+			req.setAttribute("lastPageNum", lastPageNum);
+			req.setAttribute("pageGroupStart", result[0]);
+			req.setAttribute("pageGroupEnd", result[1]);
+			req.setAttribute("pageStartNum", pageStartNum+1);
+			req.setAttribute("search", search);
+			req.setAttribute("pg", pg);
+			req.setAttribute("group", group);
+			req.setAttribute("cate", cate);
+			
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/list.jsp");
 		dispatcher.forward(req, resp);
 		

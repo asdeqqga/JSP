@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.oreilly.servlet.MultipartRequest;
 
 import kr.co.farmstory2.service.ArticleService;
@@ -20,6 +23,8 @@ public class WriteController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private ArticleService service = ArticleService.INSTANCE;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -45,34 +50,40 @@ public class WriteController extends HttpServlet {
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/file");
 		
+		
 		MultipartRequest mr = service.uploadFile(req, path);
 		
 		// multipart 폼 데이터 수신
-		String title = mr.getParameter("title");
+		
+		String group = mr.getParameter("group");
+		String cate = mr.getParameter("cate");
+		String title = mr.getParameter("title");	
 		String content = mr.getParameter("content");
 		String uid = mr.getParameter("uid");
 		String fname = mr.getFilesystemName("fname");
 		String regip = req.getRemoteAddr();
 		
 		ArticleVO article = new ArticleVO();
+		article.setCate(cate);
 		article.setTitle(title);
 		article.setContent(content);
 		article.setUid(uid);
 		article.setFname(fname);
 		article.setRegip(regip);
 		
+	
 		// 글 등록
 		int parent = service.insertArticle(article);
 		
 		// 파일을 첨부 했으면
 		if(fname != null) {
-			// 파일명 수정
-			String newName = service.renameFile(fname, uid, path);
+		// 파일명 수정
+		String newName = service.renameFile(fname, uid, path);
 			
-			// 파일 테이블 Insert
-			service.insertFile(parent, newName, fname);
+		// 파일 테이블 Insert
+		service.insertFile(parent, newName, fname);
 		}
 		
-		resp.sendRedirect("/Farmstroy2/list.do");
+		resp.sendRedirect("/Farmstory2/board/list.do?group="+group+"&cate="+cate);
 	}
 }

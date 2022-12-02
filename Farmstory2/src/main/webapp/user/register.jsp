@@ -6,7 +6,7 @@
 <main id="user">
     <section class="register">
 
-        <form action="/Farmstory2/board/register.do" method="post">
+        <form action="/Farmstory2/user/register.do" method="post">
             <table border="1">
                 <caption>사이트 이용정보 입력</caption>
                 <tr>
@@ -75,7 +75,7 @@
             </table>
 
             <div>
-                <a href="./login.do" class="btn btnCancel">취소</a>
+                <a href="/Farmstroy2/user/login.do" class="btn btnCancel">취소</a>
                 <input type="submit" value="회원가입" class="btn btnRegister"/>
             </div>
 

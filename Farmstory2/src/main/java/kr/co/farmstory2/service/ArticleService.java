@@ -42,8 +42,8 @@ public enum ArticleService {
 		return dao.selectArticles(limitStart);
 	}
 	
-	public List<ArticleVO> selectArticlesBykeyword(String keyword, int start){
-		return dao.selectArticlesByKeyword(keyword, start);
+	public List<ArticleVO> selectArticlesBykeyword(String cate, String keyword, int start){
+		return dao.selectArticlesByKeyword(cate, keyword, start);
 	}
 	
 	public void updateArticle() {}

@@ -17,9 +17,9 @@ import kr.co.farmstory2.vo.FileVO;
 
 
 
-// DAO(Data Access Object) : 데이터베이스 처리 클래스
+//DAO(Data Access Object) : 데이터베이스 처리 클래스
 public class ArticleDAO extends DBHelper {
-	
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 기본 CRUD
@@ -28,13 +28,12 @@ public class ArticleDAO extends DBHelper {
 		int parent = 0;
 		
 		try{
-			logger.info("insertArticle...");
-			// 트랜젝션 시작
 			conn = getConnection();
+			// 트랜젝션 시작
 			conn.setAutoCommit(false);
 			
 			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
-			stmt = conn.createStatement();
+			conn.createStatement();
 			
 			psmt.setString(1, article.getCate());
 			psmt.setString(2, article.getTitle());
@@ -42,6 +41,7 @@ public class ArticleDAO extends DBHelper {
 			psmt.setInt(4, article.getFname() == null ? 0 : 1);
 			psmt.setString(5, article.getUid());
 			psmt.setString(6, article.getRegip());
+			
 			psmt.executeUpdate();
 			rs = stmt.executeQuery(Sql.SELECT_MAX_NO);
 			
@@ -243,7 +243,7 @@ public int selectCountTotal(String search) {
 		return articles;
 	}
 	
-public List<ArticleVO> selectArticlesByKeyword(String keyword, int start) {
+public List<ArticleVO> selectArticlesByKeyword(String cate, String keyword, int start) {
 		
 		List<ArticleVO> articles = new ArrayList<>();
 		
@@ -252,6 +252,7 @@ public List<ArticleVO> selectArticlesByKeyword(String keyword, int start) {
 			
 			conn = getConnection();
 			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_KEYWORD);
+			psmt.setString(1, cate);
 			psmt.setString(1, "%"+keyword+"%");
 			psmt.setString(2, "%"+keyword+"%");
 			psmt.setInt(3, start);
