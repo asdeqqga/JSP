@@ -14,8 +14,11 @@ import kr.co.farmstory2.service.ArticleService;
 import kr.co.farmstory2.vo.ArticleVO;
 
 @WebServlet("/board/list.do")
-public class ListController extends HttpServlet {
+public class ListController extends HttpServlet{
 
+	
+	
+	
 	private static final long serialVersionUID = 1L;
 	private ArticleService service = ArticleService.INSTANCE;
 	
@@ -23,6 +26,7 @@ public class ListController extends HttpServlet {
 	public void init() throws ServletException {
 		
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -31,11 +35,12 @@ public class ListController extends HttpServlet {
 		String pg = req.getParameter("pg");
 		String search  = req.getParameter("search");
 		
+		
 		//현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		
 		//전체 게시물 갯수 구하기
-		int total = service.getCurrentPage(search);
+		int total = service.selectCountTotal(cate, search);
 		
 		//페이지 마지막 번호 계산
 		int lastPageNum = service.getLastPageNum(total);
@@ -51,26 +56,27 @@ public class ListController extends HttpServlet {
 		
 		List<ArticleVO> articles = null;
 		
-			if(search == null) {
-				articles = service.selectArticles(start);
-			}else {
-				articles = service.selectArticlesBykeyword(cate, search, start);
-			}			
+		if(search == null) {
+			articles = service.selectArticles(start, cate);
+		}else {
+			articles = service.selectArticlesBykeyword(cate, search, start);
+		}
+				
 		
-			req.setAttribute("articles", articles);
-			req.setAttribute("currentPage", currentPage);
-			req.setAttribute("lastPageNum", lastPageNum);
-			req.setAttribute("pageGroupStart", result[0]);
-			req.setAttribute("pageGroupEnd", result[1]);
-			req.setAttribute("pageStartNum", pageStartNum+1);
-			req.setAttribute("search", search);
-			req.setAttribute("pg", pg);
-			req.setAttribute("group", group);
-			req.setAttribute("cate", cate);
-			
+		
+		req.setAttribute("articles", articles);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageGroupStart", result[0]);
+		req.setAttribute("pageGroupEnd", result[1]);
+		req.setAttribute("pageStartNum", pageStartNum+1);
+		req.setAttribute("search", search);
+		req.setAttribute("pg", pg);
+		req.setAttribute("group", group);
+		req.setAttribute("cate", cate);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/list.jsp");
 		dispatcher.forward(req, resp);
-		
 	}
 	
 	@Override

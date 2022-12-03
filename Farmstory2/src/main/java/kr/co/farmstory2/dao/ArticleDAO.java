@@ -129,7 +129,7 @@ public class ArticleDAO extends DBHelper {
 		return article;
 	}
 	
-public int selectCountTotal(String search) {
+public int selectCountTotal(String cate ,String search) {
 		
 		int total = 0;
 		
@@ -138,10 +138,13 @@ public int selectCountTotal(String search) {
 			conn = getConnection();
 			
 			if(search == null) {
-				stmt = conn.createStatement();			
-				rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL);
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL);
+				psmt.setString(1, cate);
+				rs = psmt.executeQuery();
+				
 			}else {
 				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_FOR_SEARCH);
+				psmt.setString(1, cate);
 				psmt.setString(1, "%"+search+"%");
 				psmt.setString(2, "%"+search+"%");
 				rs = psmt.executeQuery();
@@ -203,15 +206,16 @@ public int selectCountTotal(String search) {
 	}
 	
 	
-	public List<ArticleVO> selectArticles(int limitStart) {
+	public List<ArticleVO> selectArticles(int limitStart,String cate) {
 		
 		List<ArticleVO> articles = new ArrayList<>();
 		
 		try{
-			logger.info("selectArticles");
+			logger.info("selectArticles...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES);
-			psmt.setInt(1, limitStart);
+			psmt.setString(1, cate);
+			psmt.setInt(2, limitStart);
 			
 			ResultSet rs = psmt.executeQuery();
 			

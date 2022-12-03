@@ -34,12 +34,12 @@ public enum ArticleService {
 	public void insertFile(int parent, String newName, String fname) {
 		dao.insertFile(parent, newName, fname);
 	}
-	public int selectCountTotal(String search) {
-		return dao.selectCountTotal(search);
+	public int selectCountTotal(String cate, String search) {
+		return dao.selectCountTotal(cate, search);
 	}
 	
-	public List<ArticleVO> selectArticles(int limitStart) {
-		return dao.selectArticles(limitStart);
+	public List<ArticleVO> selectArticles(int limitStart, String cate) {
+		return dao.selectArticles(limitStart, cate);
 	}
 	
 	public List<ArticleVO> selectArticlesBykeyword(String cate, String keyword, int start){
