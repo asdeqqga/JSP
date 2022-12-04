@@ -2,7 +2,6 @@
 <jsp:include page="../_header.jsp"/>
 <script src="/Farmstory2/js/validation.js"></script>
 <script>
-
 $(function(){
 	
 	$('.btnNext').click(function(e){
@@ -46,9 +45,7 @@ $(function(){
 			$('.resultPass').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
 			}			
 	});
-
 });
-
 </script>
 
 <main id="user">

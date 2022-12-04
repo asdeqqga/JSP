@@ -18,17 +18,14 @@ import kr.co.farmstory2.vo.ArticleVO;
 
 @WebServlet("/board/list.do")
 public class ListController extends HttpServlet{
-
-	
-	
 	
 	private static final long serialVersionUID = 1L;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	private ArticleService service = ArticleService.INSTANCE;
 	
-	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
-	public void init() throws ServletException {
-		
+	public void init() throws ServletException {	
 	}
 	
 	@Override
@@ -39,52 +36,41 @@ public class ListController extends HttpServlet{
 		String pg = req.getParameter("pg");
 		String search = req.getParameter("search");
 		
-		logger.debug("L1");
-		
+		logger.debug("");
 		int total = service.selectCountTotal(search, cate);
 		
-		logger.debug("L2");
-		
+		logger.debug("2");
 		int lastPageNum = service.getLastPageNum(total);
-		
-		logger.debug("L3");
-		
+	
+		logger.debug("3");
 		int currentPage = service.getCurrentPage(pg);
 		
-		logger.debug("L4");
-		
+		logger.debug("4");
 		int limitStart = service.getLimitStart(currentPage);
 		
-		logger.debug("L5");
-		
+		logger.debug("5");
 		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
 		
-		logger.debug("L6");
-		
+		logger.debug("6");
 		int pageStartNum = service.getPageStartNum(total, limitStart);
 		
-		logger.debug("L7");
-		
+		logger.debug("7");
 		int start = service.getStartNum(currentPage);
 		
-		logger.debug("L8");
-		
+		logger.debug("8");
 		List<ArticleVO> articles = null;
 		
-		logger.debug("L9");
-		
+		logger.debug("9");
 		if(search == null) {
 			
-			logger.debug("L10");
+			logger.debug("10");
 			articles = service.selectArticles(cate, start);
-		}else {
+		} else {
 			
-			logger.debug("L11");
+			logger.debug("11");
 			articles = service.selectArticlesByKeyword(search, start);
 		}
-		
-		
-		
+				
 		req.setAttribute("cate", cate);
 		req.setAttribute("group", group);
 		req.setAttribute("articles", articles);
@@ -97,14 +83,12 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("search", search);
 		
-		
-		logger.debug("L12");
+		logger.debug("12");
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/list.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 	}
 }

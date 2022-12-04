@@ -1,6 +1,5 @@
 package kr.co.farmstory2.dao;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +11,6 @@ import kr.co.farmstory2.db.Sql;
 import kr.co.farmstory2.vo.ArticleVO;
 import kr.co.farmstory2.vo.FileVO;
 
-
-
-//DAO(Data Access Object) : 데이터베이스 처리 클래스
 public class ArticleDAO extends DBHelper {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -290,7 +286,7 @@ public class ArticleDAO extends DBHelper {
 		try {
 			logger.info("selectLatests(String)...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(Sql.SELECT_LATESTS);
+			psmt = conn.prepareStatement(Sql.SELECT_LATEST);
 			psmt.setString(1, cate);
 			rs = psmt.executeQuery();
 			while(rs.next()) {

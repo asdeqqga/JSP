@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +18,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kr.co.farmstory2.dao.ArticleDAO;
 import kr.co.farmstory2.vo.ArticleVO;
 import kr.co.farmstory2.vo.FileVO;
-
-
 
 public enum ArticleService {
 

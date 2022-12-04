@@ -3,7 +3,6 @@ package kr.co.farmstory2.controller.board;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,21 +18,20 @@ import kr.co.farmstory2.service.ArticleService;
 import kr.co.farmstory2.vo.ArticleVO;
 
 @WebServlet("/board/write.do")
-public class WriteController extends HttpServlet {
-	
+public class WriteController extends HttpServlet{
+
 	private static final long serialVersionUID = 1L;
 	private ArticleService service = ArticleService.INSTANCE;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public void init() throws ServletException {
-		
+	public void init() throws ServletException {	
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
+		String group = req.getParameter("group");
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("group", group);
@@ -41,6 +39,7 @@ public class WriteController extends HttpServlet {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/write.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

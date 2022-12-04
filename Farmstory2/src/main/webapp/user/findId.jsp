@@ -2,7 +2,6 @@
 <jsp:include page="../_header.jsp"/>
 <script src="/Farmstory2/js/emailAuth.js"></script>
 <script>
-
 	$(function(){
 		
 		$('.btnNext').click(function(e){
@@ -40,7 +39,6 @@
 		});
 		
 	});
-
 </script>
 
 <main id="user">

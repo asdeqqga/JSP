@@ -46,20 +46,20 @@ public class RegisterController extends HttpServlet {
 		String regip = req.getRemoteAddr();
 		
 		// VO 데이터 생성
-		UserVO vo = new UserVO();
-		vo.setUid(uid);
-		vo.setPass(pass1);
-		vo.setName(name);
-		vo.setNick(nick);
-		vo.setEmail(email);
-		vo.setHp(hp);
-		vo.setZip(zip);
-		vo.setAddr1(addr1);
-		vo.setAddr2(addr2);
-		vo.setRegip(regip);
+		UserVO user = new UserVO();
+		user.setUid(uid);
+		user.setPass(pass1);
+		user.setName(name);
+		user.setNick(nick);
+		user.setEmail(email);
+		user.setHp(hp);
+		user.setZip(zip);
+		user.setAddr1(addr1);
+		user.setAddr2(addr2);
+		user.setRegip(regip);
 		
 		// 데이터베이스 처리
-		service.insertUser(vo);
+		service.insertUser(user);
 		
 		// 리다이렉트
 		resp.sendRedirect("/Farmstory2/user/login.do");

@@ -1,7 +1,6 @@
 package kr.co.farmstory2.vo;
 
 public class ArticleVO {
-	
 	private int no;
 	private int parent;
 	private int comment;
@@ -17,12 +16,25 @@ public class ArticleVO {
 	// 추가필드
 	private String fname;
 	private String nick;
-	
 	private int fno;
 	private int pno;
 	private String newName;
 	private String oriName;
 	private int download;
+	
+	
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	
 	public int getNo() {
 		return no;
@@ -30,11 +42,17 @@ public class ArticleVO {
 	public void setNo(int no) {
 		this.no = no;
 	}
+	public void setNo(String no) {
+		this.no = Integer.parseInt(no);
+	}
 	public int getParent() {
 		return parent;
 	}
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
 	}
 	public int getComment() {
 		return comment;
@@ -90,18 +108,6 @@ public class ArticleVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	public String getFname() {
-		return fname;
-	}
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-	public String getNick() {
-		return nick;
-	}
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
 	public int getFno() {
 		return fno;
 	}
@@ -132,5 +138,7 @@ public class ArticleVO {
 	public void setDownload(int download) {
 		this.download = download;
 	}
+	
+	
 	
 }

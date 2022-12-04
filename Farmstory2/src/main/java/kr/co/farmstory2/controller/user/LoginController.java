@@ -11,72 +11,79 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.farmstory2.service.UserService;
 import kr.co.farmstory2.vo.UserVO;
 
 @WebServlet("/user/login.do")
-public class LoginController extends HttpServlet {
+public class LoginController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private UserService service = UserService.INSTANCE;
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	public void init() throws ServletException {
-		
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("LoginController[GET]...");
 		
 		String success = req.getParameter("success");
 		req.setAttribute("success", success);
 		
-		HttpSession sess = req.getSession();
+		logger.debug("1");
 		
-		
-		UserVO sessUser = (UserVO)sess.getAttribute("sessUser");
-		
-		if(sessUser != null) {
-			
-			resp.sendRedirect("/Farmstory2/user/list.do");
-		}else {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/user/login.jsp");
-			dispatcher.forward(req, resp);
-		}
-
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/login.jsp");
+		dispatcher.forward(req, resp);
+		logger.debug("2");
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		logger.info("LoginController[POST]...");
 		String uid = req.getParameter("uid");
 		String pass = req.getParameter("pass");
 		String auto = req.getParameter("auto");
 		
-		UserVO vo = service.selectUser(uid, pass);
+		logger.debug("1");
+		UserVO user = service.selectUser(uid, pass);
 		
-		if(vo != null) {
-			// 회원이 맞을경우
-			HttpSession sess= req.getSession();
-			sess.setAttribute("sessUser", vo);
+		logger.debug("2");
+		if(user != null) {
+			// 회원이 맞을 경우
+			logger.debug("3");
+			HttpSession sess = req.getSession();
+			sess.setAttribute("sessUser", user);
 			
 			if(auto != null) {
-				
+				logger.debug("4");
 				String sessId = sess.getId();
 				
 				// 쿠키 생성
-				Cookie cookie = new Cookie("SESSID",sessId);
+				Cookie cookie = new Cookie("SESSID", sessId);
 				cookie.setPath("/");
 				cookie.setMaxAge(60*60*24*3);
 				resp.addCookie(cookie);
 				
+				logger.debug("5");
 				// 세션아이디 데이터베이스 저장
 				service.updateUserForSession(uid, sessId);
+				logger.debug("6");
 			}
 			
-			resp.sendRedirect("/Farmstory2/");
-		}else {
-			// 회원이 아닌경우
-			resp.sendRedirect("/Farmstory2/user/login.do?success=100");
+			logger.debug("7");
+			resp.sendRedirect("/Farmstory2/index.do");
 			
+		} else {
+			// 회원이 아닌 경우
+			logger.debug("8");
+			resp.sendRedirect("/Farmstory2/user/login.do?success=100");
 		}
 	}
 }

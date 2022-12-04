@@ -17,7 +17,7 @@ import kr.co.farmstory2.service.UserService;
 import kr.co.farmstory2.vo.UserVO;
 
 @WebServlet("/user/findPw.do")
-public class FindPwController extends HttpServlet {
+public class FindPwController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private UserService service = UserService.INSTANCE;
@@ -28,30 +28,30 @@ public class FindPwController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPw.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
 		String uid = req.getParameter("uid");
 		String email = req.getParameter("email");
 		
-		UserVO vo = service.selectUserForFindPw(uid, email);
+		UserVO user = service.selectUserForFindPw(uid, email);
 		
 		JsonObject json = new JsonObject();
 		
-		if(vo != null) {
+		if(user != null) {
 			json.addProperty("result", 1);
 			
 			HttpSession sess = req.getSession();
-			sess.setAttribute("sessUserForPw", vo);
+			sess.setAttribute("sessUserForPw", user);
 		} else {
 			json.addProperty("result", 0);
 		}
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
+		
 	}
 }

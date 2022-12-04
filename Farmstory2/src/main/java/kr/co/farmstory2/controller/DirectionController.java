@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/introduction/direction.do")
-public class DirectionController extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
+@WebServlet("/direction.do")
+public class DirectionController extends HttpServlet{
 	
+	private static final long serialVersionUID = 1L;
 	@Override
 	public void init() throws ServletException {
-		
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/introduction/direction.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/instroduction/direction.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

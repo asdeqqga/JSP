@@ -17,10 +17,11 @@ public class ModifyController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private ArticleService service = ArticleService.INSTANCE;
+	
 	@Override
-	public void init() throws ServletException {
-		
+	public void init() throws ServletException {	
 	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate = req.getParameter("cate");
@@ -38,8 +39,9 @@ public class ModifyController extends HttpServlet{
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/modify.jsp");
-		dispatcher.forward(req, resp);
+		dispatcher.forward(req, resp);	
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String no = req.getParameter("no");
@@ -48,7 +50,6 @@ public class ModifyController extends HttpServlet{
 		String pg = req.getParameter("pg");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		
 		
 		service.updateArticle(title, content, no);
 		

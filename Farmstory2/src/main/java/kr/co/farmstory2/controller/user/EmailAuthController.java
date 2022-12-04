@@ -12,19 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 
 import kr.co.farmstory2.service.UserService;
+
 @WebServlet("/user/emailAuth.do")
-public class EmailAuthController extends HttpServlet {
+public class EmailAuthController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private UserService service = UserService.INSTANCE;
 	
 	@Override
+	public void init() throws ServletException {
+	}
+	
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		String email = req.getParameter("email");
 		int[] result = service.sendEmailCode(email);
 		
-		// JSON 출력
 		JsonObject json = new JsonObject();
 		json.addProperty("status", result[0]);
 		json.addProperty("code", result[1]);
@@ -33,5 +36,7 @@ public class EmailAuthController extends HttpServlet {
 		writer.print(json.toString());
 	}
 	
-
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
+	}
 }

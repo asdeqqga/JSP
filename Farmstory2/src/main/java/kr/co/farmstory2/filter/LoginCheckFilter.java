@@ -10,7 +10,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,8 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.farmstory2.vo.UserVO;
 
-
-public class LoginCheckFilter implements Filter {
+public class LoginCheckFilter implements Filter{
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -29,43 +27,48 @@ public class LoginCheckFilter implements Filter {
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		
-		// 필터를 동작할 요청주소 리스트 구성
 		uriList = new ArrayList<>();
-		uriList.add("/Farmstroy2/list.do");
-		uriList.add("/Farmstroy2/write.do");
-		uriList.add("/Farmstroy2/modify.do");
-		uriList.add("/Farmstroy2/view.do");
-		
+		uriList.add("/Farmstory2/board/list.do");
+		uriList.add("/Farmstory2/board/write.do");
+		uriList.add("/Farmstory2/board/modify.do");
+		uriList.add("/Farmstory2/board/view.do");
 	}
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		logger.info("LoginCheckFilter doFilter...");
 		
-		HttpServletRequest req = (HttpServletRequest) request;
-		String uri = req.getRequestURI();		
+		logger.info("LoginCheckFilter...");
+		
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpServletResponse resp = (HttpServletResponse)response;
+		
+		String uri = req.getRequestURI();
 		
 		HttpSession sess = req.getSession();
 		UserVO sessUser = (UserVO)sess.getAttribute("sessUser");
 		
-	if(uriList.contains(uri)) {
+		logger.debug("1");
 		
-		// 로그인을 하지 않았을 경우
-		if(sessUser == null) {
-			((HttpServletResponse) response).sendRedirect("/Farmstroy2/user/login.do");
-			return;
+		if(uriList.contains(uri)) {
+			logger.debug("2");
 			
+			// 로그인을 하지 않았을 경우
+			if(sessUser == null) {
+				logger.debug("3");
+				resp.sendRedirect("/Farmstory2/user/login.do");
+				return;
 			}
-		
 		}else if(uri.contains("/user/login.do")) {
+			logger.debug("4");
 			// 로그인을 했을 경우
 			if(sessUser != null) {
-				((HttpServletResponse) response).sendRedirect("/Farmstroy2/list.do");
+				logger.debug("5");
+				resp.sendRedirect("/Farmstory2/board/list.do");
 				return;
 			}
 		}
-		
+		logger.debug("6");
 		chain.doFilter(request, response);
 	}
+
 }

@@ -1,6 +1,5 @@
-<%@page import="kr.co.farmstory2.vo.UserVO"%>
-<%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,14 +14,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>    
     <script>
-        $(function(){
+    	$(function(){
             $('.slider > ul').bxSlider({
                 slideWidth: 980,
                 pager: false,
                 controls: false,
                 auto: true
             });
+
             $('#tabs').tabs();
+            
         });
     </script>
 
@@ -32,23 +33,24 @@
         <header>
             <a href="/Farmstory2/index.do" class="logo"><img src="/Farmstory2/img/logo.png" alt="로고"/></a>
             <p>
-                <a href="/Farmstory2/">HOME |</a>
+                <a href="/Farmstory2/index.do">HOME |</a>
                 <c:choose>
-               		<c:when test="${sessUser.uid eq null}">
+                	<c:when test="${sessUser eq null}">
                 		<a href="/Farmstory2/user/login.do">로그인 |</a>
-                		<a href="/Farmstory2/user/terms.do">회원가입 |</a>
+                		<a href="/Farmstory2/user/terms.do">회원가입 |</a>	
                 	</c:when>
                 	<c:otherwise>
-                <span>${sessUser.nick}</span>님 |
-                <a href="/Farmstory2/user/logout.do">로그아웃 |</a>
+                	<span>${sessUser.nick}</span>님 |
+                		<a href="/Farmstory2/user/logout.do">로그아웃 |</a>
                 	</c:otherwise>
                 </c:choose>
-                <a href="/Farmstory2/board/list.do">고객센터</a>
+                
+                <a href="#">고객센터</a>
             </p>
             <img src="/Farmstory2/img/head_txt_img.png" alt="3만원 이상 무료배송"/>
             
             <ul class="gnb">
-                <li><a href="/Farmstory2/introduction/hello.do">팜스토리소개</a></li>
+                <li><a href="/Farmstory2/hello.do">팜스토리소개</a></li>
                 <li><a href="/Farmstory2/board/list.do?group=market&cate=market"><img src="/Farmstory2/img/head_menu_badge.png" alt="30%"/>장보기</a></li>
                 <li><a href="/Farmstory2/board/list.do?group=croptalk&cate=story">농작물이야기</a></li>
                 <li><a href="/Farmstory2/board/list.do?group=event&cate=event">이벤트</a></li>

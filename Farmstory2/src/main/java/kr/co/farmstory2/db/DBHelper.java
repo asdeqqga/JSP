@@ -3,16 +3,12 @@ package kr.co.farmstory2.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-// 좀 더 편리한 DB처리를 위한 헬퍼 클래스
 public class DBHelper {
-	
 	protected Connection conn = null;
 	protected PreparedStatement psmt = null;
 	protected PreparedStatement psmt1 = null;
