@@ -62,7 +62,7 @@ public enum ArticleService {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss_");
 		String now = sdf.format(new Date());
-		String newName = now+uid+ext; // 20221026160417_chhak0503.txt
+		String newName = now+uid+ext;
 		
 		File f1 = new File(path+"/"+fname);
 		File f2 = new File(path+"/"+newName);
