@@ -1,9 +1,6 @@
 package kr.co.farmstory2.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,247 +19,145 @@ public class ArticleDAO extends DBHelper {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	// 기본 CRUD
 	public int insertArticle(ArticleVO article) {
-		
-		int parent = 0;
-		
-		try{
+		int result = 0;
+		try {
+			logger.info("insertArticle...");
 			conn = getConnection();
-			// 트랜젝션 시작
+			
 			conn.setAutoCommit(false);
 			
 			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
-			conn.createStatement();
+			stmt = conn.createStatement();
 			
 			psmt.setString(1, article.getCate());
 			psmt.setString(2, article.getTitle());
 			psmt.setString(3, article.getContent());
-			psmt.setInt(4, article.getFname() == null ? 0 : 1);
+			psmt.setInt(4, article.getFname() == null ? 0:1);
 			psmt.setString(5, article.getUid());
 			psmt.setString(6, article.getRegip());
 			
 			psmt.executeUpdate();
 			rs = stmt.executeQuery(Sql.SELECT_MAX_NO);
 			
-			// 작업확정
 			conn.commit();
 			
-			if(rs.next()){
-				parent = rs.getInt(1);
+			if(rs.next()) {
+				result = rs.getInt(1);
 			}
 			
 			close();
 			
-		}catch(Exception e){
-			e.printStackTrace();
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return parent;
+		return result;
 	}
-	
 	public void insertFile(int parent, String newName, String fname) {
-		try{
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
+		try {
+			logger.info("insertFile...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.INSERT_FILE);
 			psmt.setInt(1, parent);
 			psmt.setString(2, newName);
 			psmt.setString(3, fname);
 			
 			psmt.executeUpdate();
 			
-			psmt.close();
-			conn.close();			
-		}catch(Exception e){
-			e.printStackTrace();
+			close();
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
 	}
 	
-	public ArticleVO insertComment(ArticleVO comment) {
+	public ArticleVO insertComment(ArticleVO vo) {
+		ArticleVO comment = null;
 		
-		ArticleVO article = null;
-		int result = 0;
-		
-		try{
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
+		try {
+			logger.info("insertComment...");
+			
+			conn = getConnection();
 			
 			conn.setAutoCommit(false);
-			PreparedStatement psmt1 = conn.prepareStatement(Sql.INSERT_COMMENT);
-			PreparedStatement psmt2 = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_PLUS);
-			Statement stmt = conn.createStatement();
-			psmt1.setInt(1, comment.getParent());
-			psmt1.setString(2, comment.getContent());
-			psmt1.setString(3, comment.getUid());
-			psmt1.setString(4, comment.getRegip());
+			psmt1 = conn.prepareStatement(Sql.INSERT_COMMENT);
+			psmt2 = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_PLUS);
+			stmt = conn.createStatement();
 			
-			psmt2.setInt(1, comment.getParent());
+			psmt1.setInt(1, vo.getParent());
+			psmt1.setString(2, vo.getContent());
+			psmt1.setString(3, vo.getUid());
+			psmt1.setString(4, vo.getRegip());
 			
-			result = psmt1.executeUpdate();
+			psmt2.setInt(1, vo.getParent());
+			
+			psmt1.executeUpdate();
 			psmt2.executeUpdate();
-			ResultSet rs = stmt.executeQuery(Sql.SELECT_COMMENT_LATEST);
+			rs = stmt.executeQuery(Sql.SELECT_COMMENT_LATEST);
 			
 			conn.commit();
 			
 			if(rs.next()) {
-				article = new ArticleVO();
-				article.setNo(rs.getInt(1));
-				article.setParent(rs.getInt(2));
-				article.setContent(rs.getString(6));
-				article.setRdate(rs.getString(11).substring(2, 10));
-				article.setNick(rs.getString(12));
+				comment = new ArticleVO();
+				comment.setNo(rs.getInt(1));
+				comment.setParent(rs.getInt(2));
+				comment.setContent(rs.getString(6));
+				comment.setRdate(rs.getString(11).substring(2, 10));
+				comment.setNick(rs.getString(12));
 			}
-			
-			rs.close();
-			stmt.close();
-			psmt1.close();
-			psmt2.close();
-			conn.close();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-		}
-		
-		return article;
-	}
-	
-public int selectCountTotal(String cate ,String search) {
-		
-		int total = 0;
-		
-		try {
-			logger.info("selectCountTotal");
-			conn = getConnection();
-			
-			if(search == null) {
-				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL);
-				psmt.setString(1, cate);
-				rs = psmt.executeQuery();
-				
-			}else {
-				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_FOR_SEARCH);
-				psmt.setString(1, cate);
-				psmt.setString(1, "%"+search+"%");
-				psmt.setString(2, "%"+search+"%");
-				rs = psmt.executeQuery();
-			}
-			
-			if(rs.next()) {
-				total = rs.getInt(1);
-			}
-			
 			close();
-		}catch (Exception e) {
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return total;
+		
+		return comment;		
 	}
 	
-	public ArticleVO selectArticle(String no) {
-		
-		ArticleVO article = null;
-		
-		try{
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_ARTICLE);
+	public ArticleVO selectArticle(String no, String cate) {
+		ArticleVO vo = null;
+		try {
+			logger.info("selectArticle...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_ARTICLE);
 			psmt.setString(1, no);
-			
-			ResultSet rs = psmt.executeQuery();
-			
-			if(rs.next()){
-				article = new ArticleVO();
-				article.setNo(rs.getInt(1));
-				article.setParent(rs.getInt(2));
-				article.setComment(rs.getInt(3));
-				article.setCate(rs.getString(4));
-				article.setTitle(rs.getString(5));
-				article.setContent(rs.getString(6));
-				article.setFile(rs.getInt(7));
-				article.setHit(rs.getInt(8));
-				article.setUid(rs.getString(9));
-				article.setRegip(rs.getString(10));
-				article.setRdate(rs.getString(11));
-				article.setFno(rs.getInt(12));
-				article.setPno(rs.getInt(13));
-				article.setNewName(rs.getString(14));
-				article.setOriName(rs.getString(15));
-				article.setDownload(rs.getInt(16));
+			psmt.setString(2, cate);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = new ArticleVO();
+				vo.setNo(rs.getInt(1));
+				vo.setParent(rs.getInt(2));
+				vo.setComment(rs.getInt(3));
+				vo.setCate(rs.getString(4));
+				vo.setTitle(rs.getString(5));
+				vo.setContent(rs.getString(6));
+				vo.setFile(rs.getInt(7));
+				vo.setHit(rs.getInt(8));
+				vo.setUid(rs.getString(9));
+				vo.setRegip(rs.getString(10));
+				vo.setRdate(rs.getString(11));
+				vo.setFno(rs.getInt(12));
+				vo.setPno(rs.getInt(13));
+				vo.setNewName(rs.getString(14));
+				vo.setOriName(rs.getString(15));
+				vo.setDownload(rs.getInt(16));
 			}
-			
-			rs.close();
-			psmt.close();
-			conn.close();
-			
-		}catch(Exception e){
-			e.printStackTrace();
+			close();
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		return article;
+		return vo;
 	}
 	
-	
-	public List<ArticleVO> selectArticles(int limitStart,String cate) {
-		
+	public List<ArticleVO> selectArticles(String cate, int start) {
 		List<ArticleVO> articles = new ArrayList<>();
-		
-		try{
+		try {
 			logger.info("selectArticles...");
+			
 			conn = getConnection();
 			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES);
 			psmt.setString(1, cate);
-			psmt.setInt(2, limitStart);
-			
-			ResultSet rs = psmt.executeQuery();
-			
-			while(rs.next()){
-				ArticleVO article = new ArticleVO();
-				article.setNo(rs.getInt(1));
-				article.setParent(rs.getInt(2));
-				article.setComment(rs.getInt(3));
-				article.setCate(rs.getString(4));
-				article.setTitle(rs.getString(5));
-				article.setContent(rs.getString(6));
-				article.setFile(rs.getInt(7));
-				article.setHit(rs.getInt(8));
-				article.setUid(rs.getString(9));
-				article.setRegip(rs.getString(10));
-				article.setRdate(rs.getString(11));
-				article.setNick(rs.getString(12));
-				
-				articles.add(article);			
-			}
-			
-			close();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-			logger.error(e.getMessage());
-		}
-		
-		return articles;
-	}
-	
-public List<ArticleVO> selectArticlesByKeyword(String cate, String keyword, int start) {
-		
-		List<ArticleVO> articles = new ArrayList<>();
-		
-		try {
-			logger.info("selectArticlesByKeyword...");
-			
-			conn = getConnection();
-			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_KEYWORD);
-			psmt.setString(1, cate);
-			psmt.setString(1, "%"+keyword+"%");
-			psmt.setString(2, "%"+keyword+"%");
-			psmt.setInt(3, start);
-			
+			psmt.setInt(2, start);
 			rs = psmt.executeQuery();
-			
 			while(rs.next()) {
 				ArticleVO article = new ArticleVO();
 				article.setNo(rs.getInt(1));
@@ -278,59 +173,61 @@ public List<ArticleVO> selectArticlesByKeyword(String cate, String keyword, int 
 				article.setRdate(rs.getString(11));
 				article.setNick(rs.getString(12));
 				
-				articles.add(article);	
+				articles.add(article);
 			}
 			close();
-			
-		}catch (Exception e) {
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		
 		return articles;
 	}
-		
 	
-	
-	public FileVO selectFile(String parent) {
-		FileVO fb = null;
+	public List<ArticleVO> selectArticlesByKeyword(String keyword, int start) {
 		
-		try{
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_FILE);
-			psmt.setString(1, parent);
-		 	ResultSet rs = psmt.executeQuery();
-		 	
-		 	if(rs.next()){
-		 		fb = new FileVO();
-		 		fb.setFno(rs.getInt(1));
-		 		fb.setParent(rs.getInt(2));
-		 		fb.setNewName(rs.getString(3));
-		 		fb.setOriName(rs.getString(4));
-		 		fb.setDownload(rs.getInt(5));
-		 	}
-		 	rs.close();
-		 	psmt.close();
-		 	conn.close();
-		}catch(Exception e){
-			e.printStackTrace();
+		List<ArticleVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectArticlesByKeyword...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_KEYWORD);
+			psmt.setString(1, "%"+keyword+"%");
+			psmt.setString(2, "%"+keyword+"%");
+			psmt.setInt(3, start);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ArticleVO article = new ArticleVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setComment(rs.getInt(3));
+				article.setCate(rs.getString(4));
+				article.setTitle(rs.getString(5));
+				article.setContent(rs.getString(6));
+				article.setFile(rs.getInt(7));
+				article.setHit(rs.getInt(8));
+				article.setUid(rs.getString(9));
+				article.setRegip(rs.getString(10));
+				article.setRdate(rs.getString(11));
+				article.setNick(rs.getString(12));
+				
+				articles.add(article);
+			}
+			
+			close();
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return fb;
+		return articles;
 	}
 	
-	public List<ArticleVO> selectComments(String parent) {
-		
+	public List<ArticleVO> selectComments(String no) {
 		List<ArticleVO> comments = new ArrayList<>();
-		
 		try {
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COMMENTS);
-			psmt.setString(1, parent);
+			logger.info("selectComments...");
 			
-			ResultSet rs = psmt.executeQuery();
-			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_COMMENTS);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ArticleVO comment = new ArticleVO();
 				comment.setNo(rs.getInt(1));
@@ -349,165 +246,237 @@ public List<ArticleVO> selectArticlesByKeyword(String cate, String keyword, int 
 				comments.add(comment);
 			}
 			
-			rs.close();
-			psmt.close();
-			conn.close();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return comments;
+	}
+	
+	public int selectCountTotal(String search, String cate) {
+		int total = 0;
+		try {
+			logger.info("selectCountTotal...");
 			
-		}catch (Exception e) {
+			conn = getConnection();
+			
+			rs = null;
+			
+			if(search == null) {
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL);
+				psmt.setString(1, cate);
+				rs = psmt.executeQuery();	
+			}else {
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_FOR_SEARCH);
+				psmt.setString(1, cate);
+				psmt.setString(2, "%"+search+"%");
+				psmt.setString(3, "%"+search+"%");
+				rs = psmt.executeQuery();
+			}
+			
+			while(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	public List<ArticleVO> selectLatest(String cate) {
+		List<ArticleVO> latests = new ArrayList<>();
+		try {
+			logger.info("selectLatests(String)...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_LATESTS);
+			psmt.setString(1, cate);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ArticleVO ab = new ArticleVO();
+				ab.setNo(rs.getInt(1));
+				ab.setTitle(rs.getString(2));
+				ab.setRdate(rs.getString(3).substring(2,10));
+				
+				latests.add(ab);
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return latests;
+	}
+	
+	public List<ArticleVO> selectLatests(String cate1, String cate2, String cate3) {
+		List<ArticleVO> latests = new ArrayList<>();
+		try {
+			logger.info("selectLatests...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_LATESTS);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			psmt.setString(3, cate3);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ArticleVO ab = new ArticleVO();
+				ab.setNo(rs.getInt(1));
+				ab.setTitle(rs.getString(2));
+				ab.setRdate(rs.getString(3).substring(2,10));
+				
+				latests.add(ab);
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return latests;
+	}
+	
+	public FileVO selectFile(String parent) {
+		FileVO fb = null;
+		try{
+			logger.info("selectFile");
+			conn = getConnection();
+			psmt =  conn.prepareStatement(Sql.SELECT_FILE);
+			psmt.setString(1, parent);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				fb = new FileVO();
+				fb.setFno(rs.getInt(1));
+				fb.setParent(rs.getInt(2));
+				fb.setNewName(rs.getString(3));
+				fb.setOriName(rs.getString(4));
+				fb.setDownload(rs.getInt(5));
+			}
+			
+			close();
+		}catch(Exception e){
 			e.printStackTrace();
 			logger.error(e.getMessage());
 		}
 		
-		return comments;
+		return fb;
 	}
 	
-	public void updateArticle(String no, String title, String content) {
+	
+	public void updateArticle(String title, String content, String no) {
+		
 		try {
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			logger.info("updateArticle...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
 			psmt.setString(1, title);
 			psmt.setString(2, content);
 			psmt.setString(3, no);
 			psmt.executeUpdate();
-			psmt.close();
-			conn.close();
-		}catch (Exception e) {
-			e.printStackTrace();
+			
+			close();
+			
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		
 	}
-	
 	public void updateArticleHit(String no) {
+		
 		try {
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_HIT);
+			logger.info("updateArticleHit...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_HIT);
 			psmt.setString(1, no);
 			psmt.executeUpdate();
-			psmt.close();
-			conn.close();
-		}catch (Exception e) {
-			e.printStackTrace();
+			
+			
+			close();
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-	}
-	
-	public void updateFileDownload(int fno) {
-		try {
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_FILE_DOWNLOAD);
-			psmt.setInt(1, fno);
-			psmt.executeUpdate();
-			psmt.close();
-			conn.close();
-		}catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-		}
+		
 	}
 	
 	public int updateComment(String no, String content) {
 		int result = 0;
 		try {
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_COMMENT);
+			logger.info("updateComment...");
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_COMMENT);
 			psmt.setString(1, content);
 			psmt.setString(2, no);
-			
 			result = psmt.executeUpdate();
-			psmt.close();
-			conn.close();
-		}catch (Exception e) {
-			e.printStackTrace();
+			
+			close();
+			
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		
 		return result;
+	}
+	
+	public void updateFileDownload(int fno) {
+		try {
+			logger.info("updateFileDownload...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_FILE_DOWNLOAD);
+			psmt.setInt(1, fno);
+			psmt.executeUpdate();
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 	
 	public void deleteArticle(String no) {
 		try {
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
+			logger.info("deleteArticle...");
+			
+			conn = getConnection();
+			
+			psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
 			psmt.setString(1, no);
 			psmt.setString(2, no);
+			
 			psmt.executeUpdate();
-			psmt.close();
-			conn.close();
-		}catch (Exception e) {
-			e.printStackTrace();
+			
+			close();
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		
 	}
-	
-	public String deleteFile(String no) {
-		
-		String newName = null;
-		
-		try {
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
-			
-			conn.setAutoCommit(false);
-			PreparedStatement psmt1 = conn.prepareStatement(Sql.SELECT_FILE);
-			PreparedStatement psmt2 = conn.prepareStatement(Sql.DELETE_FILE);
-			
-			psmt1.setString(1, no);
-			psmt2.setString(1, no);
-			
-			ResultSet rs = psmt1.executeQuery();
-			psmt2.executeUpdate();
-			
-			conn.commit();
-			
-			if(rs.next()) {
-				newName = rs.getString(3);
-			}
-			
-			psmt1.close();
-			psmt2.close();
-			conn.close();
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-		}
-		
-		return newName;
-	}
-	
 	public int deleteComment(String no, String parent) {
 		int result = 0;
 		try {
-			logger.info("selectCountTotal");
-			Connection conn = getConnection();
+			logger.info("deleteComment...");
+			
+			conn = getConnection();
 			
 			conn.setAutoCommit(false);
-			PreparedStatement psmt1 = conn.prepareStatement(Sql.DELETE_COMMENT);
-			PreparedStatement psmt2 = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_MINUS);
-			psmt1.setString(1, no);
-			psmt1.setString(1, parent);
-			result = psmt1.executeUpdate();
-			psmt2.executeUpdate();
+			psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt2 = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_MINUS);
+			psmt.setString(1, no);
+			psmt.setString(2, parent);
 			
+			psmt2.setString(1, parent);
+			
+			result = psmt.executeUpdate();
+			psmt2.executeUpdate();
 			conn.commit();
 			
-			psmt1.close();
-			psmt2.close();
-			conn.close();
-		}catch (Exception e) {
-			e.printStackTrace();
+			close();
+			
+		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		
 		return result;
 	}
-	
 	
 	
 }

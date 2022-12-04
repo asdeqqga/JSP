@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.farmstory2.service.ArticleService;
 import kr.co.farmstory2.vo.ArticleVO;
 
@@ -22,6 +25,7 @@ public class ListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private ArticleService service = ArticleService.INSTANCE;
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
 	public void init() throws ServletException {
 		
@@ -29,52 +33,72 @@ public class ListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String group = req.getParameter("group");
+		logger.info("ListController...");
 		String cate = req.getParameter("cate");
+		String group = req.getParameter("group");
 		String pg = req.getParameter("pg");
-		String search  = req.getParameter("search");
+		String search = req.getParameter("search");
 		
+		logger.debug("L1");
 		
-		//현재 페이지 번호
-		int currentPage = service.getCurrentPage(pg);
+		int total = service.selectCountTotal(search, cate);
 		
-		//전체 게시물 갯수 구하기
-		int total = service.selectCountTotal(cate, search);
+		logger.debug("L2");
 		
-		//페이지 마지막 번호 계산
 		int lastPageNum = service.getLastPageNum(total);
 		
-		//페이지 그룹 start, end 계산
+		logger.debug("L3");
+		
+		int currentPage = service.getCurrentPage(pg);
+		
+		logger.debug("L4");
+		
+		int limitStart = service.getLimitStart(currentPage);
+		
+		logger.debug("L5");
+		
 		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
 		
-		//페이지 시작 번호
-		int pageStartNum = service.getPageStartNum(total, currentPage);
+		logger.debug("L6");
 		
-		//시작 인덱스
+		int pageStartNum = service.getPageStartNum(total, limitStart);
+		
+		logger.debug("L7");
+		
 		int start = service.getStartNum(currentPage);
+		
+		logger.debug("L8");
 		
 		List<ArticleVO> articles = null;
 		
+		logger.debug("L9");
+		
 		if(search == null) {
-			articles = service.selectArticles(start, cate);
+			
+			logger.debug("L10");
+			articles = service.selectArticles(cate, start);
 		}else {
-			articles = service.selectArticlesBykeyword(cate, search, start);
+			
+			logger.debug("L11");
+			articles = service.selectArticlesByKeyword(search, start);
 		}
-				
 		
 		
+		
+		req.setAttribute("cate", cate);
+		req.setAttribute("group", group);
 		req.setAttribute("articles", articles);
+		req.setAttribute("limitStart", limitStart);
 		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("total", total);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("search", search);
-		req.setAttribute("pg", pg);
-		req.setAttribute("group", group);
-		req.setAttribute("cate", cate);
 		
+		
+		logger.debug("L12");
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/list.jsp");
 		dispatcher.forward(req, resp);
 	}

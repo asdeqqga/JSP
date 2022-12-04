@@ -1,5 +1,29 @@
 <%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"></jsp:include>
+<script>
+	
+$(function(){
+	
+	console.log('here1');
+	
+	
+	// 공지사항 최신글 가져오기
+	$.ajax({
+		url:'/Farmstory2/board/getLatests.do?cate=notice',
+		method: 'GET',
+		async: false,
+		dataType: 'json',		
+		success: function(data){
+			console.log('here2');
+			for(let latest of data){
+				let url = "/Farmstory2/board/view.do?group=community&cate=notice&no="+latest.no+"&pg=1";
+				$('#tabs-1 .txt').append("<li><a href='"+url+"'>"+latest.title+"</a></li>");
+			}
+		}
+	});
+</script>
+
         <main>
             <div class="slider">
                 <ul>

@@ -23,7 +23,6 @@ public class WriteController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private ArticleService service = ArticleService.INSTANCE;
-	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
@@ -36,9 +35,8 @@ public class WriteController extends HttpServlet {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
 		
-		
-		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
+		req.setAttribute("group", group);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/write.jsp");
 		dispatcher.forward(req, resp);
@@ -46,44 +44,42 @@ public class WriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 파일 업로드
-		ServletContext ctx = req.getServletContext();
-		String path = ctx.getRealPath("/file");
+		logger.debug("insertArticle...0");
+		String savePath = service.getSavePath(req);
+		MultipartRequest mr = service.uploadFile(req, savePath);
 		
-		
-		MultipartRequest mr = service.uploadFile(req, path);
-		
-		// multipart 폼 데이터 수신
-		
-		String group = mr.getParameter("group");
-		String cate = mr.getParameter("cate");
-		String title = mr.getParameter("title");	
-		String content = mr.getParameter("content");
+		logger.debug("insertArticle...1");
 		String uid = mr.getParameter("uid");
+		String title = mr.getParameter("title");
+		String content = mr.getParameter("content");
 		String fname = mr.getFilesystemName("fname");
 		String regip = req.getRemoteAddr();
+		String group = mr.getParameter("group");
+		String cate = mr.getParameter("cate");
 		
-		ArticleVO article = new ArticleVO();
-		article.setCate(cate);
-		article.setTitle(title);
-		article.setContent(content);
-		article.setUid(uid);
-		article.setFname(fname);
-		article.setRegip(regip);
+		logger.debug("insertArticle...2");
+		ArticleVO vo = new ArticleVO();
+		vo.setCate(cate);
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setUid(uid);
+		vo.setFname(fname);
+		vo.setRegip(regip);
 		
-	
-		// 글 등록
-		int parent = service.insertArticle(article);
+		logger.debug("insertArticle...3"+fname);
+		int parent = service.insertArticle(vo);
 		
-		// 파일을 첨부 했으면
+		
 		if(fname != null) {
-		// 파일명 수정
-		String newName = service.renameFile(fname, uid, path);
+			// 파일명 수정
+			logger.debug("insertArticle...4");
+			String newName = service.renameFile(fname, uid, savePath);
 			
-		// 파일 테이블 Insert
-		service.insertFile(parent, newName, fname);
+			logger.debug("insertArticle...5"+newName);
+			service.insertFile(parent, newName, fname);
 		}
 		
+		logger.debug("insertArticle...6");
 		resp.sendRedirect("/Farmstory2/board/list.do?group="+group+"&cate="+cate);
 	}
 }

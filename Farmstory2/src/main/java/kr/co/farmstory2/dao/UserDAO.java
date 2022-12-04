@@ -15,22 +15,22 @@ public class UserDAO extends DBHelper {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void insertUser(UserVO vo) {
+	public void insertUser(UserVO uv) {
 		try {
 			logger.info("insertUser...");
 			
 			conn = getConnection();
 			psmt = conn.prepareStatement(Sql.INSERT_USER);
-			psmt.setString(1, vo.getUid());
-			psmt.setString(2, vo.getPass());
-			psmt.setString(3, vo.getName());
-			psmt.setString(4, vo.getNick());
-			psmt.setString(5, vo.getEmail());
-			psmt.setString(6, vo.getHp());
-			psmt.setString(7, vo.getZip());
-			psmt.setString(8, vo.getAddr1());
-			psmt.setString(9, vo.getAddr2());
-			psmt.setString(10, vo.getRegip());
+			psmt.setString(1, uv.getUid());
+			psmt.setString(2, uv.getPass());
+			psmt.setString(3, uv.getName());
+			psmt.setString(4, uv.getNick());
+			psmt.setString(5, uv.getEmail());
+			psmt.setString(6, uv.getHp());
+			psmt.setString(7, uv.getZip());
+			psmt.setString(8, uv.getAddr1());
+			psmt.setString(9, uv.getAddr2());
+			psmt.setString(10, uv.getRegip());
 			psmt.executeUpdate();
 			close();
 			
