@@ -13,5 +13,6 @@
             <p>
                 <span>${sessUser.nick}</span>님 반갑습니다.
                 <a href="/Jboard2/user/logout.do">[로그아웃]</a>
+                <a href="/Jboard2/user/info.do">[회원정보]</a>
             </p>
         </header>

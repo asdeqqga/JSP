@@ -16,6 +16,20 @@ public class Sql {
 											+ "`regip`=?,"
 											+ "`rdate`=NOW()";
 	
+	public static final String INSERT_USER2 = "insert into `board_user` set "
+											+ "`uid`=?,"
+											+ "`pass`=SHA2(?, 256),"
+											+ "`rdate`=?,"
+											+ "`name`=?,"
+											+ "`nick`=?,"
+											+ "`email`=?,"
+											+ "`hp`=?,"
+											+ "`zip`=?,"
+											+ "`addr1`=?,"
+											+ "`addr2`=?,"
+											+ "`regip`=?,";
+											
+	
 	public static final String SELECT_TERMS = "select * from `board_terms`";
 	public static final String SELECT_USER  = "select * from `board_user` where `uid`=? and `pass`=SHA2(?, 256)";
 	public static final String SELECT_USER_BY_SESSID = "SELECT * FROM `board_user` WHERE `sessId`=? AND `sessLimitDate` > NOW()";
@@ -26,10 +40,12 @@ public class Sql {
 	public static final String SELECT_USER_FOR_FIND_PW = "select * from `board_user` where `uid`=? and `email`=?";
 	
 	public static final String UPDATE_USER_PASSWORD = "update `board_user` set `pass`=SHA2(?, 256) where `uid`=?";
+	public static final String UPDATE_USER_PASSWORD2 = "update `board_user` set `pass`=SHA2(?, 256) ";
 	public static final String UPDATE_USER_FOR_SESSION = "UPDATE `board_user` SET `sessId`=?, `sessLimitDate` = DATE_ADD(NOW(), INTERVAL 3 DAY) WHERE `uid`=?";
 	public static final String UPDATE_USER_FOR_SESS_LIMIT_DATE = "UPDATE `board_user` SET `sessLimitDate` = DATE_ADD(NOW(), INTERVAL 3 DAY) WHERE `sessId`=?";
 	public static final String UPDATE_USER_FOR_SESSION_OUT = "UPDATE `board_user` SET `sessId`=NULL, `sessLimitDate`=NULL WHERE `uid`=?";
 	
+	public static final String DELETE_ONE_MEMBER = "delete from `board_user` where `uid`=?";
 	
 	// board
 	public static final String INSERT_ARTICLE = "insert into `board_article` set "

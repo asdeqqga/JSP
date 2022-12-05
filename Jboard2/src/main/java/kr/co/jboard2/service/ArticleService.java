@@ -36,10 +36,7 @@ public enum ArticleService {
 		return dao.selectCountTotal(seach);
 	}
 	
-	public Map<String, Object> selectArticle(String no) {
-		return dao.selectArticle2(no);
-	}
-	
+
 	public List<ArticleVO> selectArticles(int limitStart) {
 		return dao.selectArticles(limitStart);
 	}

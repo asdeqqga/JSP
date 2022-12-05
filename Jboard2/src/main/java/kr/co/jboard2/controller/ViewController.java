@@ -35,21 +35,21 @@ public class ViewController extends HttpServlet {
 		
 		String no = req.getParameter("no");
 		
-		Map<String, Object> vos = service.selectArticle(no);
-		ArticleVO avo = (ArticleVO)vos.get("avo");
 		
-		if(!((UserVO)req.getSession().getAttribute("sessUser")).getUid().equals(avo.getUid())){
+		//ArticleVO avo = (ArticleVO)vos.get("avo");
+		
+		//if(!((UserVO)req.getSession().getAttribute("sessUser")).getUid().equals(avo.getUid())){
 			
-			service.updateHitCount(no);
+			//service.updateHitCount(no);
 		}
 		
-		req.setAttribute("avo", avo);
-		req.setAttribute("avo2", service.selectArticleComment(no));
-		req.setAttribute("fvo", (FileVO)vos.get("fvo"));
+		//req.setAttribute("avo", avo);
+		//req.setAttribute("avo2", service.selectArticleComment(no));
+		//req.setAttribute("fvo", (FileVO)vos.get("fvo"));
 		
-		req.getRequestDispatcher("/view.jsp").forward(req, resp);
+		//req.getRequestDispatcher("/view.jsp").forward(req, resp);
 		
-	}
+	//}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,7 +66,7 @@ public class ViewController extends HttpServlet {
 		logger.debug(type);
 		
 		ArticleVO vo = new ArticleVO();
-		vo.setParent(no);
+		//vo.setParent(no);
 		vo.setContent(content);
 		vo.setRegip(req.getRemoteAddr());
 		vo.setUid(uvo.getUid());

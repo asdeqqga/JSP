@@ -31,6 +31,11 @@ public enum UserService {
 	public void insertUser(UserVO vo) {
 		dao.insertUser(vo);
 	}
+	
+	public void insertUser2(UserVO vo) {
+		dao.insertUser2(vo);
+	}
+	
 	public TermsVO selectTerms() {
 		return dao.selectTerms();
 	}
@@ -62,6 +67,10 @@ public enum UserService {
 		return dao.updateUserPassword(uid, pass);
 	}
 	
+	public int updateUserPassword2(String pass) {
+		return dao.updateUserPassword2(pass);
+	}
+	
 	public void updateUserForSession(String uid, String sessId) {
 		dao.updateUserForSession(uid, sessId);
 	}
@@ -72,6 +81,10 @@ public enum UserService {
 	
 	public void updateUserForSessionOut(String uid) {
 		dao.updateUserForSessionOut(uid);
+	}
+	
+	public void deleteOneMember(String uid, String wdate) {
+		dao.deleteOneMember(uid, wdate);
 	}
 	
 	public void deleteUser() {}
