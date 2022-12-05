@@ -52,7 +52,7 @@ $(function(){
 		setTimeout(()=>{
 			
 			$.ajax({
-				url: '/Farmstory2/user/checkUid.do',
+				url: '/Jboard2/user/checkUid.do',
 				method: 'get',
 				data: jsonData,
 				dataType: 'json',
@@ -132,7 +132,7 @@ $(function(){
 		setTimeout(()=>{
 			
 			$.ajax({
-				url: '/Farmstory2/user/checkNick.do',
+				url: '/Jboard2/user/checkNick.do',
 				type: 'get',
 				data: jsonData,
 				dataType: 'json',
@@ -189,7 +189,7 @@ $(function(){
 		setTimeout(function(){
 			console.log('here4');
 			$.ajax({
-				url: '/Farmstory2/user/emailAuth.do',
+				url: '/Jboard2/user/emailAuth.do',
 				method: 'GET',
 				data: {"email": email},
 				dataType: 'json',
@@ -296,5 +296,4 @@ $(function(){
 		return true;
 	});
 });
-
-
+ 
