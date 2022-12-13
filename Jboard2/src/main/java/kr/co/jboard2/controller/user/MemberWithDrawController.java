@@ -31,13 +31,13 @@ public class MemberWithDrawController extends HttpServlet {
 		String uid = req.getParameter("uid");
 		String wdate = req.getParameter("wdate");
 		
-		UserVO vo = service.deleteOneMember(uid, wdate);
+		//UserVO vo = service.deleteOneMember(uid, wdate);
 		
-		HttpSession session=request.getSession();
-		if(result > 0) {
+		//HttpSession session=request.getSession();
+		//if(result > 0) {
 			
 		}
-	}
+	//}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
