@@ -1,0 +1,35 @@
+1665476311354	Rename resource 'src'
+1665476374975	Rename resource 'WebContent'
+1665476916688	Delete element
+1665477356006	Move 'import' to 'webapp'
+1665477358421	Move 'import.jsp' to 'import'
+1665561067012	Rename resource 'Error500.jsp'
+1665561084225	Rename resource 'ErrorTryCatch.jsp'
+1665561094947	Rename resource 'ErrorPage.jsp'
+1665561110250	Rename resource 'import.jsp'
+1665561120764	Rename resource 'HelloJSP.jsp'
+1665561124049	Move 'P66_import.jsp' to 'WEB-INF'
+1665561125566	Move 'P70_ErrorPage.jsp' to 'WEB-INF'
+1665561127233	Move 'P69_ErrorTryCatch.jsp' to 'WEB-INF'
+1665561128315	Move 'P67_Error500.jsp' to 'WEB-INF'
+1665561135987	Move 'P70_ErrorPage.jsp' to 'webapp'
+1665561137241	Move 'P69_ErrorTryCatch.jsp' to 'webapp'
+1665561138082	Move 'P67_Error500.jsp' to 'webapp'
+1665561138904	Move 'P66_import.jsp' to 'webapp'
+1665561172376	Delete element
+1665561176080	Delete element
+1665561454387	Move 'P72_TrimWhitespace.jsp' to 'webapp'
+1665640100335	Move 'P76_IncludeMain.jsp' to 'webapp'
+1665742811951	Move 'P79_ScriptElements.jsp' to 'webapp'
+1665743282283	Move 'P42_HelloJSP.jsp' to '01'
+1665743283500	Move 'P66_import.jsp' to '01'
+1665743284715	Move 'P67_Error500.jsp' to '01'
+1665743285757	Move 'P69_ErrorTryCatch.jsp' to '01'
+1665743286809	Move 'P70_ErrorPage.jsp' to '01'
+1665743287892	Move 'P72_TrimWhitespace.jsp' to '01'
+1665743289205	Move 'P74 버퍼와 플러시.jsp' to '01'
+1665743299520	Move 'P79_ScriptElements.jsp' to '01'
+1665743314991	Copy file
+1665743318113	Copy file
+1665743325074	Delete element
+1665743327625	Delete element

@@ -1,0 +1,2 @@
+String sender = "jungy0309@gmail.com";
+String password = "gywamdofnazpiknu";
